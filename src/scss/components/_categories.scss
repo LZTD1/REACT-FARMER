@@ -1,0 +1,59 @@
+
+.sortingMethods{
+    overflow: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    @include noselect;
+    margin: 30px 30px 50px 50px;
+    &__categories{
+        display: flex;
+        
+        .category{
+            cursor: pointer;
+            margin-right: 10px;
+            font-weight: 600;
+            background-color: lighten($color: $gray-line, $amount: 5);
+            border-radius: 15px;
+            padding: 10px 30px;
+            transition: $duration background-color;
+            
+            &:hover{
+                background-color: $gray-line;
+            }
+            &:active{
+                background-color: darken($color: $gray-line, $amount: 10);
+            }
+        }
+        .active{
+            background-color: black;
+            color: white;
+
+            &:hover{
+                background-color: black;
+            }
+            &:active{
+                background-color: lighten($color: black, $amount: 40);
+            }
+        }
+    }
+    &__sortingBy{
+        span{
+            font-weight: 700;
+            margin-left: 10px;
+        }
+        select{
+            appearance: none;
+            -moz-appearance: none;
+            -webkit-appearance: none;
+            margin-left: 10px;
+            border: none;
+            border-bottom: 1px dashed $green;
+            background-color: transparent;
+
+            font-size: 17px;
+            text-align: center;
+            color: darken($color: $green, $amount: 15);
+        }
+    }
+}
