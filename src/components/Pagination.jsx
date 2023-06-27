@@ -9,7 +9,10 @@ function Pagination() {
     <div className="pagination">
       <GetPaginationPrevious />
       {pages.map((value, index) => (
-        <span key={index} onClick={() => setActivePage(index)} className={index === activePage ? 'active' : ''}>
+        <span
+          key={index}
+          onClick={() => setActivePage(index)}
+          className={index === activePage ? 'active' : ''}>
           {value}
         </span>
       ))}

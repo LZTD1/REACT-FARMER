@@ -44,7 +44,7 @@ function ProductCard({
 
   const zoomStyle = {
     transformOrigin: `${position.x}px ${position.y}px`,
-    transform: isZoomed ? 'scale(1.8)' : 'none',
+    transform: isZoomed ? 'scale(1.7)' : 'none',
   };
 
   return (
