@@ -1,14 +1,22 @@
 import React, { cloneElement, useState } from 'react';
 import { compileStringAsync } from 'sass';
 
-import testJSON from '../test_data.json';
-
 function ProductContainer() {
+  const [items, setItems] = React.useState([]);
+  React.useEffect(() => {
+    fetch('https://649d52b89bac4a8e669d91e8.mockapi.io/items')
+      .then((res) => res.json())
+      .then((arr) => {
+        setItems(arr);
+      });
+  }, []);
+
   const typeOfProduct = ['Кг', 'Л', 'Шт'];
   // 0 kg 1 litr 2 pieces
+
   return (
     <div className="productContainer">
-      {testJSON.map((value, key) => (
+      {items.map((value, key) => (
         <ProductCard key={key} {...value} type={typeOfProduct[value.type]} />
       ))}
     </div>
@@ -74,7 +82,10 @@ function ProductCard({
         </span>
         <div className="productContainer__item__descriptionContainer__buyDescription">
           <div className="productContainer__item__descriptionContainer__buyDescription__price">
-            Цена: <span>{pricePerKG} ₽/{type}</span> 
+            Цена:{' '}
+            <span>
+              {pricePerKG} ₽/{type}
+            </span>
           </div>
           <div className="productContainer__item__descriptionContainer__buyDescription__buttonBuy">
             <span>Заказать</span>
