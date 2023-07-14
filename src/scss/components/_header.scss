@@ -14,7 +14,11 @@
     img {
       margin: 0 20px 0 50px;
     }
-
+    @media (max-width: 850px) {
+      div{
+        visibility: hidden;
+      }
+    }
     h1 {
       color: #181818;
       font-size: 24px;

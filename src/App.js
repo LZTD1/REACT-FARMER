@@ -1,5 +1,5 @@
 import './scss/app.scss';
-import Header from './components/Header';
+import Header from './components/HeaderBlock/Header';
 import Home from './screens/Home';
 import NotFound from './screens/NotFound';
 import { Routes, Route } from 'react-router-dom';

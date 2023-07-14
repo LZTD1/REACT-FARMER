@@ -1,0 +1,105 @@
+@import 'src/scss/variables';
+
+.root {
+  @include noselect;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+.logotype {
+  margin: 30px 0px 0px 30px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-right: 20px;
+
+  img {
+    margin-right: 10px;
+    height: 100%;
+    width: 70px;
+  }
+  div {
+    flex-direction: column;
+    h1 {
+      width: 100%;
+      font-size: 35px;
+    }
+    p {
+      font-weight: 200;
+      font-size: 20px;
+    }
+  }
+
+  @media (max-width: 1297px) {
+    div {
+      h1 {
+        font-size: 25px;
+        width: auto;
+      }
+      p {
+        display: none;
+      }
+    }
+  }
+
+}
+.search {
+  margin-right: 20px;
+
+  display: flex;
+  flex-direction: row;
+  border: 1px solid $gray-line;
+  width: 600px;
+  width: 600px;
+  margin-top: auto;
+  border-radius: 10px;
+  height: 50px;
+
+  svg {
+    margin-left: 5px;
+    width: 40px;
+  }
+  input {
+    font-weight: 200;
+    font-size: 20px;
+    margin-left: 10px;
+    border: none;
+  }
+  @media (max-width: 975px) {
+    width: 400px;
+  }
+}
+.buyButton {
+  margin-right: 20px;
+  display: flex;
+  flex-direction: row;
+  background-color: darken($color: $green, $amount: 0);
+  width: 200px;
+  height: 50px;
+  margin-top: auto;
+  border-radius: 10px;
+  font-size: 20px;
+  align-items: center;
+  justify-content: space-evenly;
+
+  span:nth-child(1) {
+  }
+  span:nth-child(2) {
+    height: 30px;
+    border-left: 2px solid darken($color: $green, $amount: 15);
+  }
+  span:nth-child(3) {
+    display: flex;
+    justify-content: center;
+    svg {
+      margin-left: 3px;
+    }
+  }
+  &:hover {
+    background-color: darken($color: $green, $amount: 5);
+  }
+  &:active {
+    background-color: darken($color: $green, $amount: 10);
+  }
+}
