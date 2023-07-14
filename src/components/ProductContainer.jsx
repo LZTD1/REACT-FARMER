@@ -1,13 +1,17 @@
-import React, { cloneElement, useState } from 'react';
-import { compileStringAsync } from 'sass';
+import React from 'react';
+import ProductBlock from './ProductBlock';
+import Skeleton from './ProductBlock/skeleton';
 
 function ProductContainer() {
   const [items, setItems] = React.useState([]);
+  const [isLoading, setIsLoading] = React.useState(true);
+
   React.useEffect(() => {
     fetch('https://649d52b89bac4a8e669d91e8.mockapi.io/items')
       .then((res) => res.json())
       .then((arr) => {
         setItems(arr);
+        setIsLoading(false);
       });
   }, []);
 
@@ -16,82 +20,13 @@ function ProductContainer() {
 
   return (
     <div className="productContainer">
-      {items.map((value, key) => (
-        <ProductCard key={key} {...value} type={typeOfProduct[value.type]} />
-      ))}
-    </div>
-  );
-}
-
-function ProductCard({
-  ratingProduct,
-  cropYear,
-  sellerCity,
-  sellerName,
-  name,
-  description,
-  photo,
-  pricePerKG,
-  type,
-  buyProduct,
-}) {
-  const [position, setPosition] = useState({ x: 0, y: 0 });
-  const [isZoomed, setIsZoomed] = useState(false);
-
-  const handleMouseMove = (e) => {
-    setPosition({ x: e.nativeEvent.offsetX, y: e.nativeEvent.offsetY });
-  };
-
-  const handleMouseEnter = () => {
-    setIsZoomed(true);
-  };
-
-  const handleMouseLeave = () => {
-    setIsZoomed(false);
-  };
-
-  const zoomStyle = {
-    transformOrigin: `${position.x}px ${position.y}px`,
-    transform: isZoomed ? 'scale(1.7)' : 'none',
-  };
-
-  return (
-    <div className="productContainer__item">
-      <div
-        className="productContainer__item__photoContaiener"
-        onMouseMove={handleMouseMove}
-        onMouseEnter={handleMouseEnter}
-        onMouseLeave={handleMouseLeave}>
-        <img src={photo} alt={name} style={zoomStyle} />
-      </div>
-      <div className="productContainer__item__descriptionContainer">
-        <div className="productContainer__item__descriptionContainer__line">
-          <h3 className="productContainer__item__descriptionContainer__line__title">{name}</h3>
-          <span className="productContainer__item__descriptionContainer__line__rating">
-            ⭐ {ratingProduct}/5
-          </span>
-          <span className="productContainer__item__descriptionContainer__line__buyProduct">
-            🛒 {buyProduct}
-          </span>
-        </div>
-        <div className="productContainer__item__descriptionContainer__sellerName tag">
-          {sellerName}
-        </div>
-        <span className="productContainer__item__descriptionContainer__line__sellerCity tag">
-          {sellerCity}
-        </span>
-        <div className="productContainer__item__descriptionContainer__buyDescription">
-          <div className="productContainer__item__descriptionContainer__buyDescription__price">
-            Цена:{' '}
-            <span>
-              {pricePerKG} ₽/{type}
-            </span>
-          </div>
-          <div className="productContainer__item__descriptionContainer__buyDescription__buttonBuy">
-            <span>Заказать</span>
-          </div>
-        </div>
-      </div>
+      {isLoading
+        ? [...new Array(8)].map((_, index) => (
+            <Skeleton className="productContainer__item loader" key={index} />
+          ))
+        : items.map((value, key) => (
+            <ProductBlock key={key} {...value} type={typeOfProduct[value.type]} />
+          ))}
     </div>
   );
 }

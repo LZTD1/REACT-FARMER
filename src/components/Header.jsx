@@ -1,18 +1,22 @@
+import { Link } from "react-router-dom";
+
 function Header() {
   return (
     <div className="header">
       <div className="container">
-        <div className="header__logo">
-          <img
-            width={38}
-            src="https://creazilla-store.fra1.digitaloceanspaces.com/emojis/57949/sheaf-of-rice-emoji-clipart-md.png"
-            alt="company logo"
-          />
-          <div>
-            <h1>React Farmer</h1>
-            <p>твои здоровые продукты</p>
+        <Link to="/">
+          <div className="header__logo">
+            <img
+              width={38}
+              src="https://creazilla-store.fra1.digitaloceanspaces.com/emojis/57949/sheaf-of-rice-emoji-clipart-md.png"
+              alt="company logo"
+            />
+            <div>
+              <h1>React Farmer</h1>
+              <p>твои здоровые продукты</p>
+            </div>
           </div>
-        </div>
+        </Link>
         <div className="header__search">
           <svg
             width={100}

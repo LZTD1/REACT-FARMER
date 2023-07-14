@@ -106,4 +106,7 @@
       border: 1px solid darken($color: $gray-line, $amount: 10);
     }
   }
+  .loader {
+    border: none;
+  }
 }

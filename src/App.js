@@ -1,9 +1,18 @@
-import "./scss/app.scss";
-import MainDisplay from "./screens/MainDisplay";
+import './scss/app.scss';
+import Header from './components/Header';
+import Home from './screens/Home';
+import NotFound from './screens/NotFound';
+import { Routes, Route } from 'react-router-dom';
 
 function App() {
   return (
-    <MainDisplay />
+    <div className="wrapper">
+      <Header />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="*" element={<NotFound />} />
+      </Routes>
+    </div>
   );
 }
 
