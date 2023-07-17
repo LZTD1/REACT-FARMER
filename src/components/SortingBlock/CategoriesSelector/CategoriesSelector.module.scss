@@ -1,0 +1,22 @@
+@import 'src/scss/_variables.scss';
+
+.root {
+  @include noselect;
+
+  display: flex;
+  flex-direction: row;
+  margin-left: 50px;
+
+  div {
+    font-weight: 600;
+    cursor: pointer;
+    background-color: lighten($color: $green, $amount: 45);
+    margin-right: 10px;
+    border: 1px solid darken($color: $green, $amount: 0);
+    border-radius: 10px;
+    padding: 7px 30px;
+  }
+  div.active {
+    background-color: $green;
+  }
+}

@@ -1,0 +1,50 @@
+@import 'src/scss/_variables.scss';
+
+.root {
+  display: flex;
+  flex-direction: row;
+  margin-right: 50px;
+}
+.description {
+  display: flex;
+  margin-top: auto;
+  flex-direction: row;
+  align-items: center;
+  font-weight: 600;
+
+  svg {
+    margin-right: 5px;
+  }
+}
+.selector {
+  margin-left: 5px;
+  margin-top: auto;
+  position: relative;
+
+  .activeSelected {
+    cursor: pointer;
+    border-bottom: 1px dashed $green;
+  }
+  .selectorBlock {
+    @include noselect;
+    cursor: pointer;
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    border: 1px dashed $green;
+    background-color: lighten($color: $green, $amount: 60);
+    border-radius: 7px;
+    margin-top: 7px;
+
+    span {
+      padding: 5px 10px;
+
+      &:hover {
+        background-color: lighten($color: $green, $amount: 50);
+      }
+    }
+    span.active {
+      background-color: lighten($color: $green, $amount: 50);
+    }
+  }
+}
