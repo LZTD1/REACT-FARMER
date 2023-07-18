@@ -1,0 +1,77 @@
+@import 'src/scss/variables.scss';
+
+.root {
+  border: 1px dashed $gray-line;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: row;
+
+  width: 800px;
+  img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 10px;
+  }
+}
+.descriptionProduct {
+  width: 100%;
+  margin: auto auto auto 10px;
+}
+.HeaderBlock {
+  display: flex;
+  max-width: 600px;
+
+  .productName {
+    margin-left: 10px;
+    margin-right: 10px;
+    font-weight: 600;
+    border-bottom: 1px dashed $gray-line;
+    background-color: transparent;
+  }
+  .productSeller,
+  .productCity {
+    margin-left: 10px;
+
+    @include gray_button;
+  }
+}
+.BodyBlock {
+  display: flex;
+  justify-content: space-between;
+
+  .productBlock {
+    div {
+      span {
+        font-weight: 300;
+        font-style: italic;
+      }
+    }
+  }
+  .ButtonsBlock {
+    margin-top: auto;
+
+    button {
+      border-radius: 7px;
+      border: 1px solid $gray-line;
+      padding: 5px 10px;
+      margin-right: 5px;
+      font-weight: 600;
+    }
+    .buttonCancel {
+      cursor: pointer;
+      background-color: #ebc6c6;
+
+      &:hover {
+        background-color: #e99999;
+      }
+      &:active {
+        background-color: #e77474;
+      }
+    }
+    .buttonCommunication {
+      @include gray_button;
+      padding: 5px 10px;
+    }
+  }
+}

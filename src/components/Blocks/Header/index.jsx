@@ -36,7 +36,7 @@ function Header() {
         </svg>
         <input placeholder="Найди продукты..." />
       </div>
-      <Link to="/cart" c>
+      <Link to="/cart">
         <div className={styles.buyButton}>
           <span>520 ₽</span>
           <span></span>

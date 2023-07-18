@@ -1,4 +1,4 @@
-import SortingMethods from '../components/SortingBlock';
+import SortingMethods from '../components/Blocks/Sorting';
 import ProductContainer from '../components/ProductContainer';
 import Paginaton from '../components/Pagination';
 

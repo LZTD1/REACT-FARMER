@@ -14,5 +14,19 @@ $duration: 0.15s;
   -moz-user-select: none; /* Old versions of Firefox */
   -ms-user-select: none; /* Internet Explorer/Edge */
   user-select: none; /* Non-prefixed version, currently
-                                    supported by Chrome, Opera and Firefox */
+                              supported by Chrome, Opera and Firefox */
+}
+@mixin gray_button {
+  @include noselect;
+  cursor: pointer;
+  background-color: $gray-line;
+  border-radius: 10px;
+  padding: 2px 10px;
+
+  &:hover {
+    background-color: darken($color: $gray-line, $amount: 5);
+  }
+  &:active {
+    background-color: darken($color: $gray-line, $amount: 10);
+  }
 }

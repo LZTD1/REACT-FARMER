@@ -1,0 +1,77 @@
+@import 'src/scss/_variables.scss';
+
+.root {
+  display: flex;
+  flex-direction: column;
+  margin-left: 50px;
+
+  h1 {
+    margin-bottom: 30px;
+    margin-top: 30px;
+  }
+}
+.productsInCart {
+  display: flex;
+  margin: auto;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.bottomBlock {
+  display: flex;
+  flex-direction: column;
+
+  .textFields {
+    font-weight: 300;
+    display: flex;
+    justify-content: space-around;
+    margin-top: 30px;
+    font-size: 25px;
+
+    span {
+      font-weight: 600;
+    }
+    .price {
+      color: darken($color: $green, $amount: 7);
+    }
+  }
+  .buttons {
+    margin-top: 40px;
+    display: flex;
+    justify-content: space-around;
+
+    button {
+      @include noselect;
+      cursor: pointer;
+      padding: 5px 25px;
+      border: none;
+      border-radius: 15px;
+      font-size: 20px;
+      font-weight: 300;
+
+      &:nth-child(1) {
+        background-color: transparent;
+        border: 2px solid $gray-line;
+        color: darken($color: $gray-line, $amount: 20);
+
+        &:hover {
+          background-color: lighten($color: $gray-line, $amount: 5);
+        }
+        &:active {
+          background-color: $gray-line;
+          color: darken($color: $gray-line, $amount: 30);
+        }
+      }
+      &:nth-child(2) {
+        background-color: lighten($color: $green, $amount: 0);
+
+        &:hover {
+          background-color: darken($color: $green, $amount: 5);
+        }
+        &:active {
+          background-color: darken($color: $green, $amount: 10);
+        }
+      }
+    }
+  }
+}

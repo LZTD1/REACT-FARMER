@@ -1,9 +1,9 @@
 import './scss/app.scss';
-import Header from './components/HeaderBlock/Header';
-import Home from './screens/Home';
+import Header from './components/Blocks/Header';
 import NotFound from './screens/NotFound';
 import { Routes, Route } from 'react-router-dom';
 import Cart from './screens/Cart';
+import Home from './screens/Home';
 
 function App() {
   return (

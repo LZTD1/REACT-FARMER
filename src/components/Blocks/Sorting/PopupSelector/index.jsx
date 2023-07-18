@@ -7,6 +7,7 @@ function PopupSelector() {
   const [showPopupWindow, setShowPopupWindow] = React.useState(false);
 
   const sortingMethods = ['подешевле', 'подороже', 'популярные', 'менее популярные'];
+
   return (
     <div className={styles.root}>
       <div className={styles.description}>
@@ -22,10 +23,12 @@ function PopupSelector() {
         </svg>
         Отсортировать:
       </div>
-      <div className={styles.selector} onClick={() => setShowPopupWindow(true)}>
-        <span className={styles.activeSelected}>{sortingMethods[indexClickedSort]}</span>
+      <div className={styles.selector}>
+        <span onClick={() => setShowPopupWindow(true)} className={styles.activeSelected}>
+          {sortingMethods[indexClickedSort]}
+        </span>
         {showPopupWindow && (
-          <div className={styles.selectorBlock}>
+          <div onMouseLeave={() => setShowPopupWindow(false)} className={styles.selectorBlock}>
             {sortingMethods.map((sortingBy, id) => (
               <span
                 className={indexClickedSort === id && styles.active}

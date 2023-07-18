@@ -38,6 +38,7 @@
 
     span {
       padding: 5px 10px;
+      border-radius: 7px;
 
       &:hover {
         background-color: lighten($color: $green, $amount: 50);

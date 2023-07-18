@@ -1,6 +1,6 @@
 import React from 'react';
-import ProductBlock from './ProductBlock';
-import Skeleton from './ProductBlock/skeleton';
+import ProductBlock from './Blocks/Product';
+import Skeleton from './Blocks/Product/skeleton';
 
 function ProductContainer() {
   const [items, setItems] = React.useState([]);
@@ -12,6 +12,7 @@ function ProductContainer() {
       .then((arr) => {
         setItems(arr);
         setIsLoading(false);
+        window.scrollTo(0, 0);
       });
   }, []);
 
