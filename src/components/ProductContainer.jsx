@@ -2,20 +2,7 @@ import React from 'react';
 import ProductBlock from './Blocks/Product';
 import Skeleton from './Blocks/Product/skeleton';
 
-function ProductContainer() {
-  const [items, setItems] = React.useState([]);
-  const [isLoading, setIsLoading] = React.useState(true);
-
-  React.useEffect(() => {
-    fetch('https://649d52b89bac4a8e669d91e8.mockapi.io/items')
-      .then((res) => res.json())
-      .then((arr) => {
-        setItems(arr);
-        setIsLoading(false);
-        window.scrollTo(0, 0);
-      });
-  }, []);
-
+function ProductContainer({ isLoading, items }) {
   const typeOfProduct = ['Кг', 'Л', 'Шт'];
   // 0 kg 1 litr 2 pieces
 

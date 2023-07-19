@@ -2,12 +2,32 @@ import React from 'react';
 
 import styles from './PopupSelector.module.scss';
 
-function PopupSelector() {
-  const [indexClickedSort, setIndexClickedSort] = React.useState(0);
+function PopupSelector({ popupSorting }) {
+  const [sortBy, setSortBy] = popupSorting;
   const [showPopupWindow, setShowPopupWindow] = React.useState(false);
 
-  const sortingMethods = ['подешевле', 'подороже', 'популярные', 'менее популярные'];
-
+  const sortingMethods = [
+    {
+      name: 'подешевле',
+      orderBy: 'pricePerKG',
+      sortBy: 'asc',
+    },
+    {
+      name: 'подороже',
+      orderBy: 'pricePerKG',
+      sortBy: 'desc',
+    },
+    {
+      name: 'менее популярные',
+      orderBy: 'ratingProduct',
+      sortBy: 'asc',
+    },
+    {
+      name: 'популярные',
+      orderBy: 'ratingProduct',
+      sortBy: 'desc',
+    },
+  ];
   return (
     <div className={styles.root}>
       <div className={styles.description}>
@@ -25,19 +45,19 @@ function PopupSelector() {
       </div>
       <div className={styles.selector}>
         <span onClick={() => setShowPopupWindow(true)} className={styles.activeSelected}>
-          {sortingMethods[indexClickedSort]}
+          {sortBy.name}
         </span>
         {showPopupWindow && (
           <div onMouseLeave={() => setShowPopupWindow(false)} className={styles.selectorBlock}>
-            {sortingMethods.map((sortingBy, id) => (
+            {sortingMethods.map((obj, id) => (
               <span
-                className={indexClickedSort === id && styles.active}
+                className={sortBy.name === obj.name && styles.active}
                 key={id}
                 onClick={() => {
-                  setIndexClickedSort(id);
+                  setSortBy(obj);
                   setShowPopupWindow(false);
                 }}>
-                {sortingBy}
+                {obj.name}
               </span>
             ))}
           </div>

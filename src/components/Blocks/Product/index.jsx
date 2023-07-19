@@ -11,6 +11,8 @@ function ProductBlock({
   pricePerKG,
   type,
   buyProduct,
+
+  
 }) {
   const [position, setPosition] = React.useState({ x: 0, y: 0 });
   const [isZoomed, setIsZoomed] = React.useState(false);

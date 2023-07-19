@@ -1,13 +1,17 @@
 import CategoriesSelect from './CategoriesSelector';
 import PopupSelector from './PopupSelector';
 
-import styles from './Sorting.module.scss'
+import styles from './Sorting.module.scss';
 
-function Sorting() {
+function Sorting({ categoriesSorting, popupSorting }) {
+
   return (
     <div className={styles.root}>
-      <CategoriesSelect categories={['Все', 'Крупы', 'Овощи', 'Фрукты', 'Молочные продукты']} />
-      <PopupSelector />
+      <CategoriesSelect
+        categoriesSorting={categoriesSorting}
+        categories={['Все', 'Крупы', 'Овощи', 'Фрукты', 'Молочные продукты', 'Мясо']}
+      />
+      <PopupSelector popupSorting={popupSorting} />
     </div>
   );
 }
