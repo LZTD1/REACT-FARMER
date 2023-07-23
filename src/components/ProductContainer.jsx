@@ -2,18 +2,18 @@ import React from 'react';
 import ProductBlock from './Blocks/Product';
 import Skeleton from './Blocks/Product/skeleton';
 
-function ProductContainer({ isLoading, items }) {
-  const typeOfProduct = ['Кг', 'Л', 'Шт'];
-  // 0 kg 1 litr 2 pieces
+const TYPE_OF_PRODUCT = ['Кг', 'Л', 'Шт'];
+const SKELETON = [...new Array(8)].map((_, index) => (
+  <Skeleton className="productContainer__item loader" key={index} />
+));
 
+function ProductContainer({ isLoading, items }) {
   return (
     <div className="productContainer">
       {isLoading
-        ? [...new Array(8)].map((_, index) => (
-            <Skeleton className="productContainer__item loader" key={index} />
-          ))
+        ? SKELETON
         : items.map((value, key) => (
-            <ProductBlock key={key} {...value} type={typeOfProduct[value.type]} />
+            <ProductBlock key={key} {...value} type={TYPE_OF_PRODUCT[value.type]} />
           ))}
     </div>
   );

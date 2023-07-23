@@ -1,0 +1,35 @@
+@import 'src/scss/variables';
+
+.search {
+  margin-right: 20px;
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  border: 1px solid $gray-line;
+  width: 600px;
+  width: 600px;
+  margin-top: auto;
+  border-radius: 10px;
+  height: 50px;
+
+  .SearhIcon {
+    margin-left: 5px;
+    width: 40px;
+  }
+  .CloseIcon {
+    cursor: pointer;
+    position: absolute;
+    width: 30px;
+    right: 10px;
+    top: 10px;
+  }
+  input {
+    font-weight: 200;
+    font-size: 20px;
+    margin-left: 10px;
+    border: none;
+  }
+  @media (max-width: 975px) {
+    width: 400px;
+  }
+}

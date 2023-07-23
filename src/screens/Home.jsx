@@ -4,17 +4,16 @@ import SortingMethods from '../components/Blocks/Sorting';
 import ProductContainer from '../components/ProductContainer';
 import Paginaton from '../components/Pagination';
 
-function Home() {
+function Home({ searchState }) {
+  const [SearchValue] = searchState;
   const [items, setItems] = React.useState([]);
   const [isLoading, setIsLoading] = React.useState(true);
-
   const [sortBy, setSortBy] = React.useState({
     name: 'популярные',
     orderBy: 'ratingProduct',
     sortBy: 'desc',
   });
   const [activeIndex, setActiveIndex] = React.useState(0);
-
   React.useEffect(() => {
     setIsLoading(true);
 
@@ -30,6 +29,10 @@ function Home() {
         window.scrollTo(0, 0);
       });
   }, [activeIndex, sortBy]);
+  let products = items.filter((obj) => {
+    if (obj.name.toLowerCase().includes(SearchValue.toLowerCase())) return true;
+    return false;
+  });
 
   return (
     <>
@@ -38,7 +41,7 @@ function Home() {
         popupSorting={[sortBy, (obj) => setSortBy(obj)]}
       />
       <h1 className="allProductDescription">Все продукты:</h1>
-      <ProductContainer items={items} isLoading={isLoading} />
+      <ProductContainer items={products} isLoading={isLoading} />
       <Paginaton />
     </>
   );
