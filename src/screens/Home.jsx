@@ -4,8 +4,7 @@ import SortingMethods from '../components/Blocks/Sorting';
 import ProductContainer from '../components/ProductContainer';
 import Paginaton from '../components/Pagination';
 
-function Home({ searchState }) {
-  const [SearchValue] = searchState;
+function Home() {
   const [items, setItems] = React.useState([]);
   const [isLoading, setIsLoading] = React.useState(true);
   const [sortBy, setSortBy] = React.useState({
@@ -29,10 +28,6 @@ function Home({ searchState }) {
         window.scrollTo(0, 0);
       });
   }, [activeIndex, sortBy]);
-  let products = items.filter((obj) => {
-    if (obj.name.toLowerCase().includes(SearchValue.toLowerCase())) return true;
-    return false;
-  });
 
   return (
     <>
@@ -41,7 +36,7 @@ function Home({ searchState }) {
         popupSorting={[sortBy, (obj) => setSortBy(obj)]}
       />
       <h1 className="allProductDescription">Все продукты:</h1>
-      <ProductContainer items={products} isLoading={isLoading} />
+      <ProductContainer items={items} isLoading={isLoading} />
       <Paginaton />
     </>
   );

@@ -8,13 +8,11 @@ import Cart from './screens/Cart';
 import Home from './screens/Home';
 
 function App() {
-  const [SearchValue, setSearchValue] = React.useState('');
-
   return (
     <div className="wrapper">
-      <Header searchState={[SearchValue, setSearchValue]} />
+      <Header />
       <Routes>
-        <Route path="/" element={<Home searchState={[SearchValue, setSearchValue]} />} />
+        <Route path="/" element={<Home />} />
         <Route path="/cart" element={<Cart />} />
         <Route path="*" element={<NotFound />} />
       </Routes>

@@ -11,7 +11,7 @@ function CategoriesSelector({ categories, categoriesSorting }) {
         <div
           key={index}
           onClick={() => setActiveIndex(index)}
-          className={activeIndex === index && styles.active}>
+          className={activeIndex === index ? styles.active : ''}>
           {value}
         </div>
       ))}

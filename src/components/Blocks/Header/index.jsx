@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import Search from '../Search/';
 import styles from './HeaderBlock.module.scss';
 
-function Header({ searchState }) {
+function Header() {
   return (
     <div className={styles.root}>
       <Link to="/">
@@ -19,7 +19,7 @@ function Header({ searchState }) {
           </div>
         </div>
       </Link>
-      <Search searchState={searchState} />
+      <Search />
       <Link to="/cart">
         <div className={styles.buyButton}>
           <span>520 ₽</span>
