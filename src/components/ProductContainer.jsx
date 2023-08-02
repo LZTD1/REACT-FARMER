@@ -3,7 +3,7 @@ import ProductBlock from './Blocks/Product';
 import Skeleton from './Blocks/Product/skeleton';
 
 const TYPE_OF_PRODUCT = ['Кг', 'Л', 'Шт'];
-const SKELETON = [...new Array(8)].map((_, index) => (
+const SKELETON = [...new Array(12)].map((_, index) => (
   <Skeleton className="productContainer__item loader" key={index} />
 ));
 

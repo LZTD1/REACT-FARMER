@@ -3,25 +3,62 @@
 .root {
   cursor: pointer;
   display: flex;
-  border-radius: 10px;
   background-color: white;
   border: 1px dashed $gray-line;
 
   img {
     width: 100px;
     height: 100px;
-    border-radius: 10px;
+    border-radius: 0px 10px 10px 0px;
     object-fit: cover;
   }
 
   &:hover {
     background-color: lighten($color: $green, $amount: 45);
+    .price {
+      background-color: darken($color: #f2ffcf, $amount: 20);
+    }
   }
 }
+
 .description {
-  span {
-    font-weight: 600;
-    font-size: 20px;
-    margin-left: 10px;
+  display: flex;
+  flex-direction: column;
+  margin-left: 10px;
+
+  div {
+    .name {
+      font-weight: 600;
+      font-size: 20px;
+    }
+    .price {
+      margin-left: 15px;
+      padding: 3px;
+      border: 1px dashed #a8e800;
+      border-radius: 5px;
+      background-color: #f2ffcf;
+    }
+    margin-bottom: 5px;
+    margin-top: 5px;
+  }
+  .city,
+  .sellerName {
+    @include gray_button;
+    font-size: 13px;
+    margin-top: 5px;
   }
 }
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-thumb {
+  background-color: darken($color: $green, $amount: 10);
+  border-radius: 8px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background-color: darken($color: $green, $amount: 15);
+}
+::-webkit-scrollbar-track {
+  background-color: #f1f1f1;
+}
+
