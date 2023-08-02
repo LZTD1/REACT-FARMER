@@ -4,10 +4,12 @@ import SortingMethods from '../components/Blocks/Sorting';
 import ProductContainer from '../components/ProductContainer';
 import Paginaton from '../components/Blocks/Pagination/';
 
+export const Context = React.createContext();
+
 function Home() {
   const [items, setItems] = React.useState([]);
   const [isLoading, setIsLoading] = React.useState(true);
-  const [currentPage, setCurrentPage] = React.useState(1)
+  const [currentPage, setCurrentPage] = React.useState(1);
   const [sortBy, setSortBy] = React.useState({
     name: 'популярные',
     orderBy: 'ratingProduct',
@@ -31,15 +33,16 @@ function Home() {
   }, [activeIndex, sortBy, currentPage]);
 
   return (
-    <>
-      <SortingMethods
-        categoriesSorting={[activeIndex, (id) => setActiveIndex(id)]}
-        popupSorting={[sortBy, (obj) => setSortBy(obj)]}
-      />
+    <Context.Provider
+      value={{
+        categoriesSorting: [activeIndex, setActiveIndex],
+        popupSorting: [sortBy, setSortBy],
+      }}>
+      <SortingMethods />
       <h1 className="allProductDescription">Все продукты:</h1>
       <ProductContainer items={items} isLoading={isLoading} />
       <Paginaton onChange={(number) => setCurrentPage(number)} />
-    </>
+    </Context.Provider>
   );
 }
 

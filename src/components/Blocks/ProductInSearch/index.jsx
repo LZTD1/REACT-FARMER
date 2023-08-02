@@ -5,7 +5,7 @@ import styles from './productInSearch.module.scss';
 function ProductInSearch({ type, pricePerKG, photo, name, sellerCity, sellerName }) {
   return (
     <div className={styles.root}>
-      <img src={photo} />
+      <img src={photo} alt={name}/>
       <div className={styles.description}>
           <div>
             <span className={styles.name}>{name}</span>

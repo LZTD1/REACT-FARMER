@@ -1,8 +1,10 @@
 import React from 'react';
 
 import styles from './CategoriesSelector.module.scss';
+import { Context } from '../../../../screens/Home';
 
-function CategoriesSelector({ categories, categoriesSorting }) {
+function CategoriesSelector({ categories }) {
+  const { categoriesSorting } = React.useContext(Context);
   const [activeIndex, setActiveIndex] = categoriesSorting;
 
   return (

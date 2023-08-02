@@ -1,9 +1,12 @@
 import React from 'react';
 
 import styles from './PopupSelector.module.scss';
+import { Context } from '../../../../screens/Home';
 
-function PopupSelector({ popupSorting }) {
+function PopupSelector() {
+  const { popupSorting } = React.useContext(Context);
   const [sortBy, setSortBy] = popupSorting;
+
   const [showPopupWindow, setShowPopupWindow] = React.useState(false);
 
   const sortingMethods = [
