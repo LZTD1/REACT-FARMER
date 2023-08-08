@@ -4,7 +4,6 @@ import PopupSelector from './PopupSelector';
 import styles from './Sorting.module.scss';
 
 function Sorting() {
-
   return (
     <div className={styles.root}>
       <CategoriesSelect

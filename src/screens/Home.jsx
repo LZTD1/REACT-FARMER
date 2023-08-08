@@ -1,21 +1,18 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 
 import SortingMethods from '../components/Blocks/Sorting';
 import ProductContainer from '../components/ProductContainer';
 import Paginaton from '../components/Blocks/Pagination/';
 
-export const Context = React.createContext();
-
 function Home() {
+  const activeIndex = useSelector((state) => state.categorySort.categoryId);
+  const sortBy = useSelector((state) => state.popupSort.sort);
+
   const [items, setItems] = React.useState([]);
   const [isLoading, setIsLoading] = React.useState(true);
   const [currentPage, setCurrentPage] = React.useState(1);
-  const [sortBy, setSortBy] = React.useState({
-    name: 'популярные',
-    orderBy: 'ratingProduct',
-    sortBy: 'desc',
-  });
-  const [activeIndex, setActiveIndex] = React.useState(0);
+
   React.useEffect(() => {
     setIsLoading(true);
 
@@ -33,16 +30,12 @@ function Home() {
   }, [activeIndex, sortBy, currentPage]);
 
   return (
-    <Context.Provider
-      value={{
-        categoriesSorting: [activeIndex, setActiveIndex],
-        popupSorting: [sortBy, setSortBy],
-      }}>
+    <>
       <SortingMethods />
       <h1 className="allProductDescription">Все продукты:</h1>
       <ProductContainer items={items} isLoading={isLoading} />
       <Paginaton onChange={(number) => setCurrentPage(number)} />
-    </Context.Provider>
+    </>
   );
 }
 

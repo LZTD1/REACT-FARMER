@@ -1,11 +1,12 @@
 import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
 import styles from './PopupSelector.module.scss';
-import { Context } from '../../../../screens/Home';
+import { setSortingBy } from '../../../../redux/slices/filter/popupSort';
 
 function PopupSelector() {
-  const { popupSorting } = React.useContext(Context);
-  const [sortBy, setSortBy] = popupSorting;
+  const sortBy = useSelector((state) => state.popupSort.sort);
+  const dispatch = useDispatch();
 
   const [showPopupWindow, setShowPopupWindow] = React.useState(false);
 
@@ -57,7 +58,7 @@ function PopupSelector() {
                 className={sortBy.name === obj.name && styles.active}
                 key={id}
                 onClick={() => {
-                  setSortBy(obj);
+                  dispatch(setSortingBy(obj));
                   setShowPopupWindow(false);
                 }}>
                 {obj.name}
