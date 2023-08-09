@@ -10,24 +10,38 @@ function Search() {
   const [searchedItems, setSearchedItems] = React.useState(null);
   const inputRef = React.useRef();
 
-  React.useEffect(() => {
-    if (searchWords.trim() !== '') {
-      axios
-        .get(`https://649d52b89bac4a8e669d91e8.mockapi.io/items?search=${searchWords}`)
-        .then((res) => {
-          setSearchedItems(res.data);
-        });
-    } else {
-      setSearchedItems(null);
-    }
-  }, [searchWords]);
+  const debouncedOnChangeInput = React.useCallback(
+    debounce((value) => {
+      if (value.trim() !== '') {
+        axios
+          .get(`https://649d52b89bac4a8e669d91e8.mockapi.io/items?search=${value}`)
+          .then((res) => {
+            setSearchedItems(res.data);
+          });
+      } else {
+        setSearchedItems(null);
+      }
+    }, 250),
+    [],
+  );
+
+  const onClickClear = () => {
+    setSearchWords('');
+    inputRef.current.focus();
+  };
+
+  const onChangeInput = (event) => {
+    const newValue = event.target.value;
+    setSearchWords(newValue); // необходим для подконтрольного инпута
+    debouncedOnChangeInput(newValue);
+  };
 
   return (
     <div className={styles.root}>
       <input
         ref={inputRef}
         value={searchWords}
-        onChange={(e) => setSearchWords(e.target.value)}
+        onChange={onChangeInput}
         placeholder="Найди свой продукт..."
       />
       <svg
@@ -49,8 +63,7 @@ function Search() {
       {searchWords && (
         <svg
           onClick={() => {
-            setSearchWords('');
-            inputRef.current.focus();
+            onClickClear();
           }}
           className={styles.clearSvg}
           viewBox="0 0 24 24"

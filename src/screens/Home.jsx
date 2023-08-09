@@ -9,10 +9,10 @@ import Paginaton from '../components/Blocks/Pagination/';
 function Home() {
   const activeIndex = useSelector((state) => state.categorySort.categoryId);
   const sortBy = useSelector((state) => state.popupSort.sort);
+  const currentPage = useSelector((state) => state.paginaton.pageNumber);
 
   const [items, setItems] = React.useState([]);
   const [isLoading, setIsLoading] = React.useState(true);
-  const [currentPage, setCurrentPage] = React.useState(1);
 
   React.useEffect(() => {
     setIsLoading(true);
@@ -27,7 +27,7 @@ function Home() {
         setItems(res.data);
         setIsLoading(false);
         window.scrollTo(0, 0);
-      }); 
+      });
   }, [activeIndex, sortBy, currentPage]);
 
   return (
@@ -35,7 +35,7 @@ function Home() {
       <SortingMethods />
       <h1 className="allProductDescription">Все продукты:</h1>
       <ProductContainer items={items} isLoading={isLoading} />
-      <Paginaton onChange={(number) => setCurrentPage(number)} />
+      <Paginaton />
     </>
   );
 }
