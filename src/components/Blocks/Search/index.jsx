@@ -1,18 +1,21 @@
 import React from 'react';
+import debounce from 'lodash.debounce';
 
 import styles from './Search.module.scss';
 import ProductInSearch from '../ProductInSearch/';
+import axios from 'axios';
 
 function Search() {
   const [searchWords, setSearchWords] = React.useState('');
   const [searchedItems, setSearchedItems] = React.useState(null);
+  const inputRef = React.useRef();
 
   React.useEffect(() => {
     if (searchWords.trim() !== '') {
-      fetch(`https://649d52b89bac4a8e669d91e8.mockapi.io/items?search=${searchWords}`)
-        .then((res) => res.json())
-        .then((arr) => {
-          setSearchedItems(arr);
+      axios
+        .get(`https://649d52b89bac4a8e669d91e8.mockapi.io/items?search=${searchWords}`)
+        .then((res) => {
+          setSearchedItems(res.data);
         });
     } else {
       setSearchedItems(null);
@@ -22,6 +25,7 @@ function Search() {
   return (
     <div className={styles.root}>
       <input
+        ref={inputRef}
         value={searchWords}
         onChange={(e) => setSearchWords(e.target.value)}
         placeholder="Найди свой продукт..."
@@ -46,6 +50,7 @@ function Search() {
         <svg
           onClick={() => {
             setSearchWords('');
+            inputRef.current.focus();
           }}
           className={styles.clearSvg}
           viewBox="0 0 24 24"
@@ -64,11 +69,9 @@ function Search() {
       )}
       {searchedItems && (
         <div className={styles.searchedItems}>
-          {
-            searchedItems.map((obj, index) => (
-              <ProductInSearch key={index} {...obj} />
-            ))
-          }
+          {searchedItems.map((obj, index) => (
+            <ProductInSearch key={index} {...obj} />
+          ))}
         </div>
       )}
     </div>

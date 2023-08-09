@@ -1,5 +1,6 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
+import axios from 'axios';
 
 import SortingMethods from '../components/Blocks/Sorting';
 import ProductContainer from '../components/ProductContainer';
@@ -18,15 +19,15 @@ function Home() {
 
     const category = activeIndex === 0 ? '' : `category=${activeIndex}`;
 
-    fetch(
-      `https://649d52b89bac4a8e669d91e8.mockapi.io/items?page=${currentPage}&limit=12&${category}&sortBy=${sortBy.orderBy}&order=${sortBy.sortBy}`,
-    )
-      .then((res) => res.json())
-      .then((arr) => {
-        setItems(arr);
+    axios
+      .get(
+        `https://649d52b89bac4a8e669d91e8.mockapi.io/items?page=${currentPage}&limit=12&${category}&sortBy=${sortBy.orderBy}&order=${sortBy.sortBy}`,
+      )
+      .then((res) => {
+        setItems(res.data);
         setIsLoading(false);
         window.scrollTo(0, 0);
-      });
+      }); 
   }, [activeIndex, sortBy, currentPage]);
 
   return (
