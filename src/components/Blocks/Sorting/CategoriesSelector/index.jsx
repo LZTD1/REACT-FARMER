@@ -16,7 +16,7 @@ function CategoriesSelector({ categories }) {
           onClick={() => {
             dispatch(setCategoryId(index));
           }}
-          className={activeIndex === index ? styles.active : ''}>
+          className={Number(activeIndex) === index ? styles.active : ''}>
           {value}
         </div>
       ))}

@@ -8,6 +8,17 @@ const initialState = {
   },
 };
 
+const localizationMap = {
+  ratingProduct: {
+    desc: 'популярные',
+    asc: 'менее популярные',
+  },
+  pricePerKG: {
+    desc: 'подороже',
+    asc: 'подешевле',
+  },
+};
+
 const popupSlice = createSlice({
   name: 'popup',
   initialState: initialState,
@@ -17,13 +28,19 @@ const popupSlice = createSlice({
     },
     setSortingName_eng: (state, action) => {
       state.sort.name_eng = action.payload;
+      state.sort.name_ru = localizationMap[state.sort.name_eng][state.sort.orderBy];
     },
     setSortingOrderBy: (state, action) => {
       state.sort.orderBy = action.payload;
+      state.sort.name_ru = localizationMap[state.sort.name_eng][state.sort.orderBy];
+    },
+    resetSorting: (state) => {
+      state.sort = initialState.sort;
     },
   },
 });
 
-export const { setSortingBy, setSortingName_eng, setSortingOrderBy } = popupSlice.actions;
+export const { setSortingBy, setSortingName_eng, setSortingOrderBy, resetSorting } =
+  popupSlice.actions;
 
 export default popupSlice.reducer;

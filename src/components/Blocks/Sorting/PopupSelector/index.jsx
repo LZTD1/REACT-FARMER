@@ -8,6 +8,8 @@ function PopupSelector() {
   const sortParams = useSelector((state) => state.popupSort.sort);
   const dispatch = useDispatch();
 
+  console.log(sortParams);
+
   const [showPopupWindow, setShowPopupWindow] = React.useState(false);
 
   const sortingMethods = [

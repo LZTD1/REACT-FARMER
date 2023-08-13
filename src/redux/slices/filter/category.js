@@ -9,9 +9,12 @@ const categorySlice = createSlice({
     setCategoryId: (state, action) => {
       state.categoryId = action.payload;
     },
+    resetCategoryId: (state) => {
+      state.categoryId = initialState.categoryId;
+    },
   },
 });
 
-export const { setCategoryId } = categorySlice.actions;
+export const { setCategoryId, resetCategoryId } = categorySlice.actions;
 
 export default categorySlice.reducer;

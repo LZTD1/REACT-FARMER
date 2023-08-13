@@ -2,12 +2,24 @@ import { Link } from 'react-router-dom';
 
 import Search from '../Search/';
 import styles from './HeaderBlock.module.scss';
+import { useDispatch } from 'react-redux';
+import { resetCategoryId } from '../../../redux/slices/filter/category';
+import { resetPageNumber } from '../../../redux/slices/paginaton';
+import { resetSorting } from '../../../redux/slices/filter/popupSort';
 
 function Header() {
+  const dispatch = useDispatch();
+
+  const handlerClick = () => {
+    dispatch(resetCategoryId());
+    dispatch(resetPageNumber());
+    dispatch(resetSorting());
+  };
+
   return (
     <div className={styles.root}>
       <Link to="/">
-        <div className={styles.logotype}>
+        <div className={styles.logotype} onClick={handlerClick}>
           <img
             width={38}
             src="https://creazilla-store.fra1.digitaloceanspaces.com/emojis/57949/sheaf-of-rice-emoji-clipart-md.png"

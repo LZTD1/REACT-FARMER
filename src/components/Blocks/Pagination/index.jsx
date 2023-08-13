@@ -6,7 +6,10 @@ import styles from './pagination.module.scss';
 import { setPageNumber } from '../../../redux/slices/paginaton';
 
 function Pagination() {
-  const allPages = useSelector((state) => state.paginaton.allPages);
+  const pageData = useSelector((state) => ({
+    allPages: state.paginaton.allPages,
+    forcePage: state.paginaton.pageNumber,
+  }));
   const dispatch = useDispatch();
 
   const setPage = (event) => {
@@ -20,7 +23,8 @@ function Pagination() {
       nextLabel=">"
       onPageChange={setPage}
       pageRangeDisplayed={12}
-      pageCount={allPages}
+      pageCount={pageData.allPages}
+      forcePage={pageData.forcePage - 1}
       previousLabel="<"
       renderOnZeroPageCount={null}
     />
