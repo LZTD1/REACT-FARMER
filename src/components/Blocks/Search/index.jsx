@@ -27,6 +27,7 @@ function Search() {
 
   const onClickClear = () => {
     setSearchWords('');
+    setSearchedItems(null);
     inputRef.current.focus();
   };
 

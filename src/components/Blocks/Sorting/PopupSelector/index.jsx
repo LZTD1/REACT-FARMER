@@ -5,31 +5,31 @@ import styles from './PopupSelector.module.scss';
 import { setSortingBy } from '../../../../redux/slices/filter/popupSort';
 
 function PopupSelector() {
-  const sortBy = useSelector((state) => state.popupSort.sort);
+  const sortParams = useSelector((state) => state.popupSort.sort);
   const dispatch = useDispatch();
 
   const [showPopupWindow, setShowPopupWindow] = React.useState(false);
 
   const sortingMethods = [
     {
-      name: 'подешевле',
-      orderBy: 'pricePerKG',
-      sortBy: 'asc',
+      name_ru: 'подешевле',
+      name_eng: 'pricePerKG',
+      orderBy: 'asc',
     },
     {
-      name: 'подороже',
-      orderBy: 'pricePerKG',
-      sortBy: 'desc',
+      name_ru: 'подороже',
+      name_eng: 'pricePerKG',
+      orderBy: 'desc',
     },
     {
-      name: 'менее популярные',
-      orderBy: 'ratingProduct',
-      sortBy: 'asc',
+      name_ru: 'менее популярные',
+      name_eng: 'ratingProduct',
+      orderBy: 'asc',
     },
     {
-      name: 'популярные',
-      orderBy: 'ratingProduct',
-      sortBy: 'desc',
+      name_ru: 'популярные',
+      name_eng: 'ratingProduct',
+      orderBy: 'desc',
     },
   ];
   return (
@@ -49,19 +49,19 @@ function PopupSelector() {
       </div>
       <div className={styles.selector}>
         <span onClick={() => setShowPopupWindow(true)} className={styles.activeSelected}>
-          {sortBy.name}
+          {sortParams.name_ru}
         </span>
         {showPopupWindow && (
           <div onMouseLeave={() => setShowPopupWindow(false)} className={styles.selectorBlock}>
             {sortingMethods.map((obj, id) => (
               <span
-                className={sortBy.name === obj.name && styles.active}
+                className={sortParams.name_ru === obj.name_ru && styles.active}
                 key={id}
                 onClick={() => {
                   dispatch(setSortingBy(obj));
                   setShowPopupWindow(false);
                 }}>
-                {obj.name}
+                {obj.name_ru}
               </span>
             ))}
           </div>
