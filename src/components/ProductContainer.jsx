@@ -10,12 +10,12 @@ const SKELETON = [...new Array(12)].map((_, index) => (
 function ProductContainer({ isLoading, items }) {
   return (
     <div className="productContainer">
-      {isLoading
-        ? SKELETON
-        : items.map((value, key) => (
-            <ProductBlock key={key} {...value} type={TYPE_OF_PRODUCT[value.type]} />
-          ))}
-    </div>
+        {isLoading
+          ? SKELETON
+          : items.map((value, key) => (
+              <ProductBlock key={key} {...value} type={TYPE_OF_PRODUCT[value.type]} />
+            ))}
+      </div>
   );
 }
 export default ProductContainer;

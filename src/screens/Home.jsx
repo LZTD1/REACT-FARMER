@@ -7,8 +7,9 @@ import SortingMethods from '../components/Blocks/Sorting';
 import ProductContainer from '../components/ProductContainer';
 import Paginaton from '../components/Blocks/Pagination/';
 import { setPageNumber } from '../redux/slices/paginaton';
-import category, { setCategoryId } from '../redux/slices/filter/category';
+import { setCategoryId } from '../redux/slices/filter/category';
 import { setSortingName_eng, setSortingOrderBy } from '../redux/slices/filter/popupSort';
+import ModalProductWindow from '../components/ModalProductWindow/';
 
 function Home() {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -16,6 +17,7 @@ function Home() {
   const activeIndex = useSelector((state) => state.categorySort.categoryId);
   const sortParams = useSelector((state) => state.popupSort.sort);
   const currentPage = useSelector((state) => state.paginaton.pageNumber);
+  const modalActive = useSelector((state) => state.modalWindow.active);
 
   const [items, setItems] = React.useState([]);
   const [isLoading, setIsLoading] = React.useState(true);
@@ -77,8 +79,10 @@ function Home() {
     });
   }, [activeIndex, sortParams, currentPage]);
 
+
   return (
     <>
+      <ModalProductWindow />
       <SortingMethods />
       <h1 className="allProductDescription">Все продукты:</h1>
       <ProductContainer items={items} isLoading={isLoading} />
