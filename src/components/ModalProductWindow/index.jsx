@@ -10,6 +10,38 @@ function ModalProductWindow() {
     state.modalWindow.active,
     state.modalWindow.modalData,
   ]);
+  const [inputDiliveryAddress, setInputDiliveryAddress] = React.useState('');
+  const [inputHowMutch, setInputHowMutch] = React.useState(0);
+  const [inputDiliveryTime, setInputDiliveryTime] = React.useState('');
+
+  const handleInputHowMutch = (e) => {
+    try {
+      const numericValue = Number(e.target.value);
+      if (!isNaN(numericValue)) {
+        setInputHowMutch(numericValue);
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const handleDiliveryTime = (e) => {
+    setInputDiliveryTime(e.target.value);
+  };
+
+  React.useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === 'Escape') {
+        dispatch(setStateModalWindow(false));
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, []);
 
   return (
     <div
@@ -53,8 +85,17 @@ function ModalProductWindow() {
         <div className={styles.buyMenu}>
           <span>Заполните данные для заказа:</span>
           <input placeholder="Куда довезти" />
-          <input placeholder="Сколько заказать" />
-          <input placeholder="Во сколько привезти" />
+          <input
+            placeholder="Сколько заказать "
+            onChange={handleInputHowMutch}
+            value={inputHowMutch}
+          />
+          <input
+            placeholder="Во сколько привезти"
+            type="date"
+            value={inputDiliveryTime}
+            onChange={handleDiliveryTime}
+          />
           <button>Оформить</button>
         </div>
       </div>
