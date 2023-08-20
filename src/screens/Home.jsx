@@ -4,7 +4,7 @@ import axios from 'axios';
 import { useSearchParams } from 'react-router-dom';
 
 import SortingMethods from '../components/Blocks/Sorting';
-import ProductContainer from '../components/ProductContainer';
+import ProductContainer from '../components/ProductContainer/';
 import Paginaton from '../components/Blocks/Pagination/';
 import { setPageNumber } from '../redux/slices/paginaton';
 import { setCategoryId } from '../redux/slices/filter/category';

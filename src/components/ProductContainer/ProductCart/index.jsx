@@ -1,8 +1,13 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { setStateModalWindow, setModalData } from '../../../redux/slices/modalWindow';
+import {
+  setStateModalWindow,
+  setModalData,
+} from '../../../redux/slices/modalWindow';
 
-function ProductBlock(props) {
+import styles from './ProductCart.module.scss';
+
+function ProductCart(props) {
   const {
     ratingProduct,
     cropYear,
@@ -40,32 +45,25 @@ function ProductBlock(props) {
 
   return (
     <>
-      <div className="productContainer__item">
+      <div className={styles.root}>
         <div
-          className="productContainer__item__photoContaiener"
+          className={styles.photoContaiener}
           onMouseMove={handleMouseMove}
           onMouseEnter={handleMouseEnter}
-          onMouseLeave={handleMouseLeave}>
+          onMouseLeave={handleMouseLeave}
+        >
           <img src={photo} alt={name} style={zoomStyle} />
         </div>
-        <div className="productContainer__item__descriptionContainer">
-          <div className="productContainer__item__descriptionContainer__line">
-            <h3 className="productContainer__item__descriptionContainer__line__title">{name}</h3>
-            <span className="productContainer__item__descriptionContainer__line__rating">
-              ⭐ {ratingProduct}/5
-            </span>
-            <span className="productContainer__item__descriptionContainer__line__buyProduct">
-              🛒 {buyProduct}
-            </span>
+        <div className={styles.descriptionContainer}>
+          <div className={styles.line}>
+            <h3 className={styles.title}>{name}</h3>
+            <span className={styles.rating}>⭐ {ratingProduct}/5</span>
+            <span className={styles.buyProduct}>🛒 {buyProduct}</span>
           </div>
-          <div className="productContainer__item__descriptionContainer__sellerName tag">
-            {sellerName}
-          </div>
-          <span className="productContainer__item__descriptionContainer__line__sellerCity tag">
-            {sellerCity}
-          </span>
-          <div className="productContainer__item__descriptionContainer__buyDescription">
-            <div className="productContainer__item__descriptionContainer__buyDescription__price">
+          <div className={styles.tag}>{sellerName}</div>
+          <span className={styles.tag}>{sellerCity}</span>
+          <div className={styles.buyDescription}>
+            <div className={styles.price}>
               Цена:{' '}
               <span>
                 {pricePerKG} ₽/{type}
@@ -76,7 +74,8 @@ function ProductBlock(props) {
                 dispatch(setStateModalWindow(true));
                 dispatch(setModalData(props));
               }}
-              className="productContainer__item__descriptionContainer__buyDescription__buttonBuy">
+              className={styles.buttonBuy}
+            >
               <span>Заказать</span>
             </div>
           </div>
@@ -85,4 +84,4 @@ function ProductBlock(props) {
     </>
   );
 }
-export default ProductBlock;
+export default ProductCart;

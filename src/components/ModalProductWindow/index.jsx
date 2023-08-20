@@ -17,7 +17,7 @@ function ModalProductWindow() {
   const handleInputHowMutch = (e) => {
     try {
       const numericValue = Number(e.target.value);
-      if (!isNaN(numericValue)) {
+      if (!isNaN(numericValue) && numericValue <= 1000) {
         setInputHowMutch(numericValue);
       }
     } catch (error) {
@@ -26,7 +26,9 @@ function ModalProductWindow() {
   };
 
   const handleDiliveryTime = (e) => {
-    setInputDiliveryTime(e.target.value);
+    if (e.target.value.split('-')[0] < 2100) {
+      setInputDiliveryTime(e.target.value);
+    }
   };
 
   React.useEffect(() => {
@@ -46,12 +48,16 @@ function ModalProductWindow() {
   return (
     <div
       className={modalActive ? `${styles.root} ${styles.active}` : styles.root}
-      onClick={() => dispatch(setStateModalWindow(false))}>
+      onClick={() => dispatch(setStateModalWindow(false))}
+    >
       <div
         className={
-          modalActive ? `${styles.modal_content} ${styles.mc_active}` : styles.modal_content
+          modalActive
+            ? `${styles.modal_content} ${styles.mc_active}`
+            : styles.modal_content
         }
-        onClick={(e) => e.stopPropagation()}>
+        onClick={(e) => e.stopPropagation()}
+      >
         <button className={styles.closeButton}>
           <svg
             onClick={() => {
@@ -60,15 +66,21 @@ function ModalProductWindow() {
             className={styles.closeSvg}
             viewBox="0 0 24 24"
             fill="none"
-            xmlns="http://www.w3.org/2000/svg">
+            xmlns="http://www.w3.org/2000/svg"
+          >
             <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
-            <g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"></g>
+            <g
+              id="SVGRepo_tracerCarrier"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            ></g>
             <g id="SVGRepo_iconCarrier">
               <path
                 fillRule="evenodd"
                 clipRule="evenodd"
                 d="M19.207 6.207a1 1 0 0 0-1.414-1.414L12 10.586 6.207 4.793a1 1 0 0 0-1.414 1.414L10.586 12l-5.793 5.793a1 1 0 1 0 1.414 1.414L12 13.414l5.793 5.793a1 1 0 0 0 1.414-1.414L13.414 12l5.793-5.793z"
-                fill="#e9e6e6"></path>
+                fill="#e9e6e6"
+              ></path>
             </g>
           </svg>
         </button>

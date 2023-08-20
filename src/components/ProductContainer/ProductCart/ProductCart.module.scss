@@ -1,0 +1,103 @@
+@import '../../../scss/variables';
+
+.root {
+  border: 1px solid $gray-line;
+  transition: $duration border;
+  border-radius: 15px;
+  overflow: hidden;
+
+  width: 290px;
+  height: 450px;
+  display: flex;
+  flex-direction: column;
+
+  .photoContaiener {
+    height: 300px;
+    background-color: $gray-line;
+    overflow: hidden;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: $duration transform;
+    }
+  }
+  .descriptionContainer {
+    flex: 1;
+    position: relative;
+
+    .buyDescription {
+      transition: $duration background-color;
+
+      .buttonBuy {
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        cursor: pointer;
+        @include noselect;
+        padding: 7px 25px;
+        border-radius: 7px;
+        background-color: $green;
+        margin-right: 7px;
+        margin-bottom: 7px;
+        &:hover {
+          background-color: darken($color: $green, $amount: 10);
+        }
+        &:active {
+          background-color: darken($color: $green, $amount: 20);
+        }
+      }
+      .price {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+
+        margin-left: 7px;
+        margin-bottom: 7px;
+        padding: 5px;
+        border: 1px dashed $green;
+        border-radius: 5px;
+        background-color: lighten($color: $green, $amount: 45);
+      }
+    }
+    .line {
+      display: flex;
+      align-items: center;
+      margin-top: 5px;
+      margin-bottom: 5px;
+      border-bottom: 1px dashed $gray-line;
+      .title {
+        margin-left: 10px;
+        margin-right: auto;
+      }
+      .rating {
+        margin-right: 10px;
+      }
+      .buyProduct {
+        margin-right: 10px;
+      }
+    }
+    .tag {
+      margin-left: 5px;
+      margin-right: 5px;
+      margin-bottom: 5px;
+      display: inline-block;
+      padding: 1px;
+      border-radius: 5px;
+      background-color: $gray-line;
+      @include noselect;
+      cursor: pointer;
+      &:hover {
+        background-color: darken($color: $gray-line, $amount: 10);
+      }
+      &:active {
+        background-color: darken($color: $gray-line, $amount: 20);
+      }
+    }
+  }
+
+  &:hover {
+    border: 1px solid darken($color: $gray-line, $amount: 10);
+  }
+}
