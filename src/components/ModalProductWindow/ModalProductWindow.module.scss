@@ -150,7 +150,17 @@
   pointer-events: all;
 
   .spanActive {
-
     transform: scale(1);
+  }
+}
+.flashing {
+  animation: flash 0.5s alternate infinite;
+}
+@keyframes flash {
+  0% {
+    border: 1px solid $gray-line;
+  }
+  100% {
+    border: 1px solid red;
   }
 }

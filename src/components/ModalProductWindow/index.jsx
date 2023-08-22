@@ -19,6 +19,10 @@ function ModalProductWindow() {
   const [inputDiliveryTime, setInputDiliveryTime] = React.useState('');
   const [isPlaced, setIsPlaced] = React.useState(false);
 
+  const howMutchInputRef = React.useRef(null);
+  const diliveryTimeInputRef = React.useRef(null);
+  const diliveryAddressInputRef = React.useRef(null);
+
   const handleInputHowMutch = (e) => {
     try {
       const numericValue = Number(e.target.value);
@@ -29,7 +33,6 @@ function ModalProductWindow() {
       console.error(error);
     }
   };
-
   const handleDiliveryTime = (e) => {
     if (e.target.value.split('-')[0] < 2100) {
       setInputDiliveryTime(e.target.value);
@@ -44,6 +47,32 @@ function ModalProductWindow() {
     setInputDiliveryTime('');
   };
   const handlePlaceOrder = () => {
+    let isError = false;
+    if (inputHowMutch === 0) {
+      howMutchInputRef.current.classList.add(styles.flashing);
+      setTimeout(() => {
+        howMutchInputRef.current.classList.remove(styles.flashing);
+      }, 2000);
+      isError = true;
+    }
+    if (inputDiliveryTime.trim() === '') {
+      diliveryTimeInputRef.current.classList.add(styles.flashing);
+      setTimeout(() => {
+        diliveryTimeInputRef.current.classList.remove(styles.flashing);
+      }, 2000);
+      isError = true;
+    }
+    if (inputDiliveryAddress === '') {
+      diliveryAddressInputRef.current.classList.add(styles.flashing);
+      setTimeout(() => {
+        diliveryAddressInputRef.current.classList.remove(styles.flashing);
+      }, 2000);
+      isError = true;
+    }
+    if (isError) {
+      return;
+    }
+
     const orderData = {
       diliveryProperty: {
         inputDiliveryAddress,
@@ -52,9 +81,11 @@ function ModalProductWindow() {
       },
       ...modalData,
     };
+
     setIsPlaced(true);
+    dispatch(addItem(orderData));
+
     setTimeout(() => {
-      dispatch(addItem(orderData));
       dispatch(resetModalWindow());
       resetAllInputs();
       setIsPlaced(false);
@@ -130,20 +161,24 @@ function ModalProductWindow() {
         <div className={styles.buyMenu}>
           <span>Заполните данные для заказа:</span>
           <input
+            ref={diliveryAddressInputRef}
             onChange={handleDiliveryAddress}
             value={inputDiliveryAddress}
             placeholder="Куда довезти"
           />
           <input
+            ref={howMutchInputRef}
             placeholder="Сколько заказать "
             onChange={handleInputHowMutch}
             value={inputHowMutch}
           />
           <input
+            ref={diliveryTimeInputRef}
             placeholder="Во сколько привезти"
             type="date"
             value={inputDiliveryTime}
             onChange={handleDiliveryTime}
+            className=""
           />
           <button onClick={handlePlaceOrder}>Оформить</button>
         </div>
