@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { act } from 'react-dom/test-utils';
 
 const initialState = {
   active: false,
@@ -24,9 +25,22 @@ const modalWindowSlice = createSlice({
     setModalData: (state, action) => {
       state.modalData = action.payload;
     },
+    resetModalWindow: (state) => {
+      state.active = initialState.active;
+      state.modalData = initialState.modalData;
+    },
+    setStateAndDataModalWindow: (state, action) => {
+      state.active = action.payload.active;
+      state.modalData = action.payload.modalData;
+    },
   },
 });
 
-export const { setStateModalWindow, setModalData } = modalWindowSlice.actions;
+export const {
+  setStateModalWindow,
+  setModalData,
+  resetModalWindow,
+  setStateAndDataModalWindow,
+} = modalWindowSlice.actions;
 
 export default modalWindowSlice.reducer;

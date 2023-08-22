@@ -2,7 +2,11 @@ import React from 'react';
 
 import styles from './ModalProductWindow.module.scss';
 import { useDispatch, useSelector } from 'react-redux';
-import { setStateModalWindow } from '../../redux/slices/modalWindow';
+import {
+  resetModalWindow,
+  setStateModalWindow,
+} from '../../redux/slices/modalWindow';
+import { addItem } from '../../redux/slices/cart';
 
 function ModalProductWindow() {
   const dispatch = useDispatch();
@@ -13,6 +17,7 @@ function ModalProductWindow() {
   const [inputDiliveryAddress, setInputDiliveryAddress] = React.useState('');
   const [inputHowMutch, setInputHowMutch] = React.useState(0);
   const [inputDiliveryTime, setInputDiliveryTime] = React.useState('');
+  const [isPlaced, setIsPlaced] = React.useState(false);
 
   const handleInputHowMutch = (e) => {
     try {
@@ -30,25 +35,53 @@ function ModalProductWindow() {
       setInputDiliveryTime(e.target.value);
     }
   };
+  const handleDiliveryAddress = (e) => {
+    setInputDiliveryAddress(e.target.value);
+  };
+  const resetAllInputs = () => {
+    setInputDiliveryAddress('');
+    setInputHowMutch(0);
+    setInputDiliveryTime('');
+  };
+  const handlePlaceOrder = () => {
+    const orderData = {
+      diliveryProperty: {
+        inputDiliveryAddress,
+        inputHowMutch,
+        inputDiliveryTime,
+      },
+      ...modalData,
+    };
+    setIsPlaced(true);
+    setTimeout(() => {
+      dispatch(addItem(orderData));
+      dispatch(resetModalWindow());
+      resetAllInputs();
+      setIsPlaced(false);
+    }, 300);
+  };
 
   React.useEffect(() => {
     const handleKeyDown = (e) => {
       if (e.key === 'Escape') {
-        dispatch(setStateModalWindow(false));
+        dispatch(resetModalWindow());
+      }
+      if (e.key === 'Enter') {
+        handlePlaceOrder();
       }
     };
 
-    window.addEventListener('keydown', handleKeyDown);
+    window.addEventListener('keyup', handleKeyDown);
 
     return () => {
-      window.removeEventListener('keydown', handleKeyDown);
+      window.removeEventListener('keyup', handleKeyDown);
     };
   }, []);
 
   return (
     <div
       className={modalActive ? `${styles.root} ${styles.active}` : styles.root}
-      onClick={() => dispatch(setStateModalWindow(false))}
+      onClick={() => dispatch(resetModalWindow())}
     >
       <div
         className={
@@ -61,7 +94,7 @@ function ModalProductWindow() {
         <button className={styles.closeButton}>
           <svg
             onClick={() => {
-              dispatch(setStateModalWindow(false));
+              dispatch(resetModalWindow());
             }}
             className={styles.closeSvg}
             viewBox="0 0 24 24"
@@ -96,7 +129,11 @@ function ModalProductWindow() {
         </div>
         <div className={styles.buyMenu}>
           <span>Заполните данные для заказа:</span>
-          <input placeholder="Куда довезти" />
+          <input
+            onChange={handleDiliveryAddress}
+            value={inputDiliveryAddress}
+            placeholder="Куда довезти"
+          />
           <input
             placeholder="Сколько заказать "
             onChange={handleInputHowMutch}
@@ -108,7 +145,18 @@ function ModalProductWindow() {
             value={inputDiliveryTime}
             onChange={handleDiliveryTime}
           />
-          <button>Оформить</button>
+          <button onClick={handlePlaceOrder}>Оформить</button>
+        </div>
+        <div
+          className={
+            isPlaced
+              ? `${styles.SuccessPlaceOrder} ${styles.SuccessPlaceOrderActive}`
+              : styles.SuccessPlaceOrder
+          }
+        >
+          <span className={isPlaced ? styles.spanActive : styles.spanNonActive}>
+            ✅
+          </span>
         </div>
       </div>
     </div>

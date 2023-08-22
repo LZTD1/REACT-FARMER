@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import {
   setStateModalWindow,
   setModalData,
+  setStateAndDataModalWindow,
 } from '../../../redux/slices/modalWindow';
 
 import styles from './ProductCart.module.scss';
@@ -71,8 +72,12 @@ function ProductCart(props) {
             </div>
             <div
               onClick={() => {
-                dispatch(setStateModalWindow(true));
-                dispatch(setModalData(props));
+                dispatch(
+                  setStateAndDataModalWindow({
+                    active: true,
+                    modalData: props,
+                  })
+                );
               }}
               className={styles.buttonBuy}
             >
