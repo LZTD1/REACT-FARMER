@@ -1,36 +1,57 @@
 import React from 'react';
 
 import styles from './ProductInCart.module.scss';
+import { useDispatch } from 'react-redux';
+import { removeItems } from '../../../redux/slices/cart';
 
-function ProductInCart() {
+function ProductInCart({
+  name,
+  sellerCity,
+  sellerName,
+  type,
+  diliveryProperty,
+  photo,
+  pricePerKG,
+  orderDate,
+}) {
+  const dispatch = useDispatch();
+  const handleCancelItem = () => {
+    dispatch(removeItems(orderDate));
+  };
+
   return (
     <div className={styles.root}>
-      <img
-        src={
-          'https://sun9-48.userapi.com/impg/G-s13n1GaQzSJKTpVCcU9MIXy1ukemp0Ltr5ZQ/k3rVnIaxdu0.jpg?size=1280x853&quality=95&sign=2429976c4117a3a03264a12761638efb&c_uniq_tag=M-lM08OIQ9BkljGa9SWHka3CKjZmHhmAnngQW5WJ6Jw&type=album'
-        }
-      />
+      <img src={photo} />
       <div className={styles.descriptionProduct}>
         <div className={styles.HeaderBlock}>
-          <div className={styles.productName}>Пшеница</div>
-          <div className={styles.productSeller}>ИП "Солженицын"</div>
-          <div className={styles.productCity}>г. Рязань</div>
+          <div className={styles.productName}>{name}</div>
+          <div className={styles.productSeller}>{sellerName}</div>
+          <div className={styles.productCity}>{sellerCity}</div>
         </div>
         <div className={styles.BodyBlock}>
           <div className={styles.productBlock}>
             <div className={styles.diliveryOnDate}>
-              Доставка назначена на: <span>11.07.2023</span>
+              Доставка назначена на:{' '}
+              <span>{diliveryProperty.inputDiliveryTime}</span>
             </div>
             <div className={styles.amnount}>
-              Количество заказа: <span>1000 кг</span>
+              Количество заказа:{' '}
+              <span>
+                {diliveryProperty.inputHowMutch} {type}
+              </span>
             </div>
             <div className={styles.priceForProduct}>
-              Цена: <span>11000 рублей</span>
+              Цена:{' '}
+              <span>{diliveryProperty.inputHowMutch * pricePerKG} рублей</span>
             </div>
           </div>
           <div className={styles.ButtonsBlock}>
-            <button className={styles.buttonCommunication}>Связь с продавцом</button>
-            <button className={styles.buttonCancel}>Отменить</button>
+            <button className={styles.buttonCommunication}>
+              Связь с продавцом
+            </button>
+            <button className={styles.buttonCancel} onClick={handleCancelItem}>
+              Отменить
+            </button>
           </div>
         </div>
       </div>

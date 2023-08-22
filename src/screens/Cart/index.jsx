@@ -1,25 +1,36 @@
 import { Link } from 'react-router-dom';
 import ProductInCart from '../../components/Blocks/ProductInCart';
+import EmptyCartLabel from '../../components/EmptyCartLabel';
 
 import styles from './Cart.module.scss';
+import { useSelector } from 'react-redux';
 
 function Cart() {
+  const items = useSelector((store) => store.cart.items);
+  const [amnount, itemsCount] = useSelector((state) => [
+    state.cart.amnount,
+    state.cart.items.length,
+  ]);
+
   return (
     <div className={styles.root}>
       <h1 className="allProductDescription">Ваша корзина:</h1>
       <div className={styles.productsInCart}>
-        <ProductInCart />
-        <ProductInCart />
-        <ProductInCart />
-        <ProductInCart />
+        {items.length > 0 ? (
+          items.map((value, key) => (
+            <ProductInCart {...value} key={value.orderDate} />
+          ))
+        ) : (
+          <EmptyCartLabel />
+        )}
       </div>
       <div className={styles.bottomBlock}>
         <div className={styles.textFields}>
           <div>
-            Всего заказов: <span>4 шт</span>
+            Всего заказов: <span>{itemsCount} шт</span>
           </div>
           <div>
-            Сумма сделок: <span className={styles.price}>44000 рублей</span>
+            Сумма сделок: <span className={styles.price}>{amnount} рублей</span>
           </div>
         </div>
         <div className={styles.buttons}>

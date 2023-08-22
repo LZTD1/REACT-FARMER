@@ -79,6 +79,7 @@ function ModalProductWindow() {
         inputHowMutch,
         inputDiliveryTime,
       },
+      orderDate: Date.now(),
       ...modalData,
     };
 

@@ -1,21 +1,15 @@
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import {
-  setStateModalWindow,
-  setModalData,
-  setStateAndDataModalWindow,
-} from '../../../redux/slices/modalWindow';
+import { useDispatch } from 'react-redux';
+import { setStateAndDataModalWindow } from '../../../redux/slices/modalWindow';
 
 import styles from './ProductCart.module.scss';
 
 function ProductCart(props) {
   const {
     ratingProduct,
-    cropYear,
     sellerCity,
     sellerName,
     name,
-    description,
     photo,
     pricePerKG,
     type,

@@ -8,7 +8,10 @@ import ProductContainer from '../components/ProductContainer/';
 import Paginaton from '../components/Blocks/Pagination/';
 import { setPageNumber } from '../redux/slices/paginaton';
 import { setCategoryId } from '../redux/slices/filter/category';
-import { setSortingName_eng, setSortingOrderBy } from '../redux/slices/filter/popupSort';
+import {
+  setSortingName_eng,
+  setSortingOrderBy,
+} from '../redux/slices/filter/popupSort';
 import ModalProductWindow from '../components/ModalProductWindow/';
 
 function Home() {
@@ -17,7 +20,6 @@ function Home() {
   const activeIndex = useSelector((state) => state.categorySort.categoryId);
   const sortParams = useSelector((state) => state.popupSort.sort);
   const currentPage = useSelector((state) => state.paginaton.pageNumber);
-  const modalActive = useSelector((state) => state.modalWindow.active);
 
   const [items, setItems] = React.useState([]);
   const [isLoading, setIsLoading] = React.useState(true);
@@ -32,15 +34,24 @@ function Home() {
       dispatch(setCategoryId(searchParams.get('category')));
       isChanged.current = true;
     }
-    if (searchParams.has('page') && Number(searchParams.get('page')) !== Number(currentPage)) {
+    if (
+      searchParams.has('page') &&
+      Number(searchParams.get('page')) !== Number(currentPage)
+    ) {
       dispatch(setPageNumber(searchParams.get('page')));
       isChanged.current = true;
     }
-    if (searchParams.has('name_eng') && searchParams.get('name_eng') !== sortParams.name_eng) {
+    if (
+      searchParams.has('name_eng') &&
+      searchParams.get('name_eng') !== sortParams.name_eng
+    ) {
       dispatch(setSortingName_eng(searchParams.get('name_eng')));
       isChanged.current = true;
     }
-    if (searchParams.has('orderBy') && searchParams.get('orderBy') !== sortParams.orderBy) {
+    if (
+      searchParams.has('orderBy') &&
+      searchParams.get('orderBy') !== sortParams.orderBy
+    ) {
       dispatch(setSortingOrderBy(searchParams.get('orderBy')));
       isChanged.current = true;
     }
@@ -59,11 +70,12 @@ function Home() {
 
     setIsLoading(true);
 
-    const category = Number(activeIndex) === 0 ? '' : `&category=${activeIndex}`;
+    const category =
+      Number(activeIndex) === 0 ? '' : `&category=${activeIndex}`;
 
     axios
       .get(
-        `https://649d52b89bac4a8e669d91e8.mockapi.io/items?page=${currentPage}&limit=12${category}&sortBy=${sortParams.name_eng}&order=${sortParams.orderBy}`,
+        `https://649d52b89bac4a8e669d91e8.mockapi.io/items?page=${currentPage}&limit=12${category}&sortBy=${sortParams.name_eng}&order=${sortParams.orderBy}`
       )
       .then((res) => {
         setItems(res.data);
@@ -78,7 +90,6 @@ function Home() {
       orderBy: sortParams.orderBy,
     });
   }, [activeIndex, sortParams, currentPage]);
-
 
   return (
     <>

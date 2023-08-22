@@ -11,9 +11,17 @@ const cartSlice = createSlice({
   reducers: {
     addItem: (state, action) => {
       state.items.push(action.payload);
+      state.amnount = state.items.reduce((sum, item) => {
+        return sum + item.pricePerKG * item.diliveryProperty.inputHowMutch;
+      }, 0);
     },
     removeItems: (state, action) => {
-      state.items = state.items.filter((obj) => obj.id !== action.payload);
+      state.items = state.items.filter(
+        (obj) => obj.orderDate !== action.payload
+      );
+      state.amnount = state.items.reduce((sum, item) => {
+        return sum + item.pricePerKG * item.diliveryProperty.inputHowMutch;
+      }, 0);
     },
   },
 });
