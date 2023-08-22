@@ -1,5 +1,5 @@
 import React from 'react';
-import NotFoundBlock from '../components/Blocks/NotFound';
+import NotFoundBlock from '../components/Labels/NotFound';
 
 function NotFound() {
   return <NotFoundBlock />;

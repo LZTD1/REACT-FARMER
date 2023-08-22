@@ -1,6 +1,5 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import axios from 'axios';
 import { useSearchParams } from 'react-router-dom';
 
 import SortingMethods from '../components/Blocks/Sorting';
@@ -13,6 +12,8 @@ import {
   setSortingOrderBy,
 } from '../redux/slices/filter/popupSort';
 import ModalProductWindow from '../components/ModalProductWindow/';
+import { fetchItems } from '../redux/slices/homeItems';
+import RejectedItems from '../components/Labels/RejectedItems/';
 
 function Home() {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -20,9 +21,8 @@ function Home() {
   const activeIndex = useSelector((state) => state.categorySort.categoryId);
   const sortParams = useSelector((state) => state.popupSort.sort);
   const currentPage = useSelector((state) => state.paginaton.pageNumber);
+  const { items, status } = useSelector((state) => state.homeItems);
 
-  const [items, setItems] = React.useState([]);
-  const [isLoading, setIsLoading] = React.useState(true);
   const isFirstRender = React.useRef(true);
   const isChanged = React.useRef(false);
 
@@ -68,21 +68,19 @@ function Home() {
       }
     }
 
-    setIsLoading(true);
-
     const category =
       Number(activeIndex) === 0 ? '' : `&category=${activeIndex}`;
 
-    axios
-      .get(
-        `https://649d52b89bac4a8e669d91e8.mockapi.io/items?page=${currentPage}&limit=12${category}&sortBy=${sortParams.name_eng}&order=${sortParams.orderBy}`
-      )
-      .then((res) => {
-        setItems(res.data);
-        setIsLoading(false);
-        window.scrollTo(0, 0);
-      });
+    dispatch(
+      fetchItems({
+        currentPage,
+        category,
+        name_eng: sortParams.name_eng,
+        orderBy: sortParams.orderBy,
+      })
+    );
 
+    window.scrollTo(0, 0);
     setSearchParams({
       category: activeIndex,
       page: currentPage,
@@ -96,7 +94,11 @@ function Home() {
       <ModalProductWindow />
       <SortingMethods />
       <h1 className="allProductDescription">Все продукты:</h1>
-      <ProductContainer items={items} isLoading={isLoading} />
+      {status === 'rejected' ? (
+        <RejectedItems />
+      ) : (
+        <ProductContainer items={items} isLoading={status === 'pending'} />
+      )}
       <Paginaton />
     </>
   );

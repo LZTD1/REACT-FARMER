@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import ProductInCart from '../../components/Blocks/ProductInCart';
-import EmptyCartLabel from '../../components/EmptyCartLabel';
+import EmptyCart from '../../components/Labels/EmptyCart/';
 
 import styles from './Cart.module.scss';
 import { useSelector } from 'react-redux';
@@ -21,7 +21,7 @@ function Cart() {
             <ProductInCart {...value} key={value.orderDate} />
           ))
         ) : (
-          <EmptyCartLabel />
+          <EmptyCart />
         )}
       </div>
       <div className={styles.bottomBlock}>

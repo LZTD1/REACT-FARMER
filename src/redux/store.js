@@ -5,6 +5,8 @@ import popupSort from './slices/filter/popupSort';
 import paginaton from './slices/paginaton';
 import modalWindow from './slices/modalWindow';
 import cart from './slices/cart';
+import homeItems from './slices/homeItems';
+import searchItems from './slices/searchItems';
 
 export const store = configureStore({
   reducer: {
@@ -13,5 +15,7 @@ export const store = configureStore({
     paginaton: paginaton,
     modalWindow: modalWindow,
     cart: cart,
+    homeItems: homeItems,
+    searchItems: searchItems,
   },
 });

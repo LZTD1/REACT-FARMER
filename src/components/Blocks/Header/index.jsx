@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 
-import Search from '../Search/';
+import Search from '../../Search/';
 import styles from './HeaderBlock.module.scss';
 import { useDispatch, useSelector } from 'react-redux';
 import { resetCategoryId } from '../../../redux/slices/filter/category';
@@ -13,7 +13,7 @@ function Header() {
     state.cart.amnount,
     state.cart.items.length,
   ]);
-  
+
   const handlerClick = () => {
     dispatch(resetCategoryId());
     dispatch(resetPageNumber());
