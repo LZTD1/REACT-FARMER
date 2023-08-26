@@ -6,13 +6,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import { resetCategoryId } from '../../../redux/slices/filter/category';
 import { resetPageNumber } from '../../../redux/slices/paginaton';
 import { resetSorting } from '../../../redux/slices/filter/popupSort';
+import { selectCart } from '../../../redux/slices/cart';
 
 function Header() {
   const dispatch = useDispatch();
-  const [amnount, itemsCount] = useSelector((state) => [
-    state.cart.amnount,
-    state.cart.items.length,
-  ]);
+  const [amnount, itemsCount] = useSelector(selectCart);
 
   const handlerClick = () => {
     dispatch(resetCategoryId());

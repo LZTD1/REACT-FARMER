@@ -15,6 +15,8 @@ const categorySlice = createSlice({
   },
 });
 
+export const selectCategoryId = (state) => state.categorySort.categoryId;
+
 export const { setCategoryId, resetCategoryId } = categorySlice.actions;
 
 export default categorySlice.reducer;

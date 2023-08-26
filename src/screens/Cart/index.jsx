@@ -4,13 +4,11 @@ import EmptyCart from '../../components/Labels/EmptyCart/';
 
 import styles from './Cart.module.scss';
 import { useSelector } from 'react-redux';
+import { selectCart } from '../../redux/slices/cart';
 
 function Cart() {
   const items = useSelector((store) => store.cart.items);
-  const [amnount, itemsCount] = useSelector((state) => [
-    state.cart.amnount,
-    state.cart.items.length,
-  ]);
+  const [amnount, itemsCount] = useSelector(selectCart);
 
   return (
     <div className={styles.root}>

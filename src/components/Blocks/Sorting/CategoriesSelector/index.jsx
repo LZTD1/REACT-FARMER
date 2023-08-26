@@ -2,10 +2,10 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import styles from './CategoriesSelector.module.scss';
-import { setCategoryId } from '../../../../redux/slices/filter/category';
+import { selectCategoryId, setCategoryId } from '../../../../redux/slices/filter/category';
 
 function CategoriesSelector({ categories }) {
-  const activeIndex = useSelector((state) => state.categorySort.categoryId);
+  const activeIndex = useSelector(selectCategoryId);
   const dispatch = useDispatch();
 
   return (

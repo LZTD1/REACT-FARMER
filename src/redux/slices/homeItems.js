@@ -3,17 +3,21 @@ import axios from 'axios';
 
 export const fetchItems = createAsyncThunk(
   'homeItems/fetchItems',
-  async ({ currentPage, category, name_eng, orderBy }) => {
+  async ({ currentPage, category, name_eng, orderBy }, thunkAPI) => {
     const res = await axios.get(
       `https://649d52b89bac4a8e669d91e8.mockapi.io/items?page=${currentPage}&limit=12${category}&sortBy=${name_eng}&order=${orderBy}`
     );
+
+    if (res.data.length === 0) {
+      return thunkAPI.rejectWithValue('empty');
+    }
     return res.data;
   }
 );
 
 const initialState = {
   items: [],
-  status: 'pending',
+  status: { state: 'pending', meta: '' },
 };
 
 const homeItemsSlice = createSlice({
@@ -26,15 +30,15 @@ const homeItemsSlice = createSlice({
   },
   extraReducers: {
     [fetchItems.pending]: (state) => {
-      state.status = 'pending';
+      state.status.state = 'pending';
       state.items = [];
     },
     [fetchItems.fulfilled]: (state, action) => {
-      state.status = 'fulfilled';
+      state.status.state = 'fulfilled';
       state.items = action.payload;
     },
-    [fetchItems.rejected]: (state) => {
-      state.status = 'rejected';
+    [fetchItems.rejected]: (state, action) => {
+      state.status = { state: 'rejected', meta: action.payload };
       state.items = [];
     },
   },

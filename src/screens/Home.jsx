@@ -6,7 +6,7 @@ import SortingMethods from '../components/Blocks/Sorting';
 import ProductContainer from '../components/ProductContainer/';
 import Paginaton from '../components/Blocks/Pagination/';
 import { setPageNumber } from '../redux/slices/paginaton';
-import { setCategoryId } from '../redux/slices/filter/category';
+import { selectCategoryId, setCategoryId } from '../redux/slices/filter/category';
 import {
   setSortingName_eng,
   setSortingOrderBy,
@@ -14,12 +14,13 @@ import {
 import ModalProductWindow from '../components/ModalProductWindow/';
 import { fetchItems } from '../redux/slices/homeItems';
 import RejectedItems from '../components/Labels/RejectedItems/';
+import EmptyItems from '../components/Labels/EmptyItems';
 
 function Home() {
   const [searchParams, setSearchParams] = useSearchParams();
   const dispatch = useDispatch();
-  const activeIndex = useSelector((state) => state.categorySort.categoryId);
-  const sortParams = useSelector((state) => state.popupSort.sort);
+  const activeIndex = useSelector(selectCategoryId);
+  const sortParams = useSelector(selectSort);
   const currentPage = useSelector((state) => state.paginaton.pageNumber);
   const { items, status } = useSelector((state) => state.homeItems);
 
@@ -89,15 +90,26 @@ function Home() {
     });
   }, [activeIndex, sortParams, currentPage]);
 
+  let rejected = null;
+  if (status.state === 'rejected') {
+    if (status.meta === 'empty') {
+      rejected = <EmptyItems />;
+    } else {
+      rejected = <RejectedItems />;
+    }
+  }
+
   return (
     <>
       <ModalProductWindow />
       <SortingMethods />
       <h1 className="allProductDescription">Все продукты:</h1>
-      {status === 'rejected' ? (
-        <RejectedItems />
-      ) : (
-        <ProductContainer items={items} isLoading={status === 'pending'} />
+      {rejected && rejected}
+      {(status.state === 'pending' || status.state === 'fulfilled') && (
+        <ProductContainer
+          items={items}
+          isLoading={status.state === 'pending'}
+        />
       )}
       <Paginaton />
     </>

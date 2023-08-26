@@ -28,11 +28,13 @@ const popupSlice = createSlice({
     },
     setSortingName_eng: (state, action) => {
       state.sort.name_eng = action.payload;
-      state.sort.name_ru = localizationMap[state.sort.name_eng][state.sort.orderBy];
+      state.sort.name_ru =
+        localizationMap[state.sort.name_eng][state.sort.orderBy];
     },
     setSortingOrderBy: (state, action) => {
       state.sort.orderBy = action.payload;
-      state.sort.name_ru = localizationMap[state.sort.name_eng][state.sort.orderBy];
+      state.sort.name_ru =
+        localizationMap[state.sort.name_eng][state.sort.orderBy];
     },
     resetSorting: (state) => {
       state.sort = initialState.sort;
@@ -40,7 +42,13 @@ const popupSlice = createSlice({
   },
 });
 
-export const { setSortingBy, setSortingName_eng, setSortingOrderBy, resetSorting } =
-  popupSlice.actions;
+export const selectSort = (state) => state.popupSort.sort;
+
+export const {
+  setSortingBy,
+  setSortingName_eng,
+  setSortingOrderBy,
+  resetSorting,
+} = popupSlice.actions;
 
 export default popupSlice.reducer;

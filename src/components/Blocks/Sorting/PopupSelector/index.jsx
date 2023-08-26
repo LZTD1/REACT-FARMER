@@ -2,10 +2,10 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import styles from './PopupSelector.module.scss';
-import { setSortingBy } from '../../../../redux/slices/filter/popupSort';
+import { selectSort, setSortingBy } from '../../../../redux/slices/filter/popupSort';
 
 function PopupSelector() {
-  const sortParams = useSelector((state) => state.popupSort.sort);
+  const sortParams = useSelector(selectSort);
   const dispatch = useDispatch();
 
   const [showPopupWindow, setShowPopupWindow] = React.useState(false);
