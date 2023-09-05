@@ -6,6 +6,7 @@ import NotFound from './screens/NotFound';
 import { Routes, Route } from 'react-router-dom';
 import Cart from './screens/Cart';
 import Home from './screens/Home';
+import ItemPage from './screens/ItemPage';
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/cart" element={<Cart />} />
+        <Route path="/item/:id" element={<ItemPage />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </div>
