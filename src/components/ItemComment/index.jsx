@@ -17,6 +17,11 @@ function ItemComment() {
         <span className={styles.dateComment}>2 Апреля 2023</span>
         <span className={styles.rating}>⭐⭐⭐</span>
       </div>
+      <div className={styles.BodyComment}>
+        <span>
+          Это мой супер-крутой комментарий!
+        </span>
+      </div>
     </div>
   );
 }

@@ -1,8 +1,12 @@
 @import 'src/scss/_variables.scss';
 
 .root {
-  border: 1px solid red;
+  border: 1px dashed $gray-line;
+  padding: 10px;
+  border-radius: 10px;
   display: flex;
+  max-width: 800px;
+  flex-direction: column;
 }
 .HeaderComment {
   display: flex;
@@ -34,8 +38,16 @@
       }
     }
   }
-  .dateComment{
+  .dateComment {
     font-weight: 300;
     margin-right: 20px;
+  }
+}
+.BodyComment {
+  margin-left: 10px;
+  width: 650px;
+  margin-top: 20px;
+  span {
+    font-weight: 300;
   }
 }

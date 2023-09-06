@@ -42,9 +42,17 @@ function ItemPage() {
       <div className={styles.commentBlock}>
         <h2>Отзывы о товаре:</h2>
         <div className={styles.comments}>
-          <ItemComment />
+          <div className={styles.SeeComments}>
+            <ItemComment />
+            <ItemComment />
+            <ItemComment />
+            <ItemComment />
+          </div>
+          <div className={styles.writeComment}>
+            <textarea placeholder='Напишите свой комментарий'/>
+            <button>Отправить комментарий!</button>
+          </div>
         </div>
-        <div className={styles.writeComment}></div>
       </div>
     </div>
   );
