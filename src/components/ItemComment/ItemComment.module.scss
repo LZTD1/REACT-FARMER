@@ -5,13 +5,21 @@
   padding: 10px;
   border-radius: 10px;
   display: flex;
-  max-width: 800px;
+  max-width: 900px;
   flex-direction: column;
 }
 .HeaderComment {
   display: flex;
   align-items: center;
 
+  .rating {
+    margin-left: auto;
+  }
+  .dateComment {
+    margin-left: auto;
+    font-weight: 300;
+    margin-right: 15px;
+  }
   .PhotoAndName {
     display: flex;
     margin-right: 400px;
@@ -37,10 +45,6 @@
         color: lighten($color: $green, $amount: 40);
       }
     }
-  }
-  .dateComment {
-    font-weight: 300;
-    margin-right: 20px;
   }
 }
 .BodyComment {

@@ -2,9 +2,7 @@ import React from 'react';
 
 import styles from './ItemComment.module.scss';
 
-function ItemComment() {
-  const name = 'Данил П.';
-
+function ItemComment({ name, rating, comment }) {
   return (
     <div className={styles.root}>
       <div className={styles.HeaderComment}>
@@ -15,12 +13,10 @@ function ItemComment() {
           <span className={styles.userName}>{name}</span>
         </div>
         <span className={styles.dateComment}>2 Апреля 2023</span>
-        <span className={styles.rating}>⭐⭐⭐</span>
+        <span className={styles.rating}>{'⭐'.repeat(rating)}</span>
       </div>
       <div className={styles.BodyComment}>
-        <span>
-          Это мой супер-крутой комментарий!
-        </span>
+        <span>{comment}</span>
       </div>
     </div>
   );

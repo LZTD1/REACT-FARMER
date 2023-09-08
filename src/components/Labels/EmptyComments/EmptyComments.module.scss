@@ -1,0 +1,16 @@
+@import 'src/scss/_variables.scss';
+
+.root {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  border: 2px dashed $gray-line;
+  background-color: lighten($color: $gray-line, $amount: 5);
+  border-radius: 10px;
+  padding: 10px;
+  h1 {
+    font-weight: 500;
+  }
+}

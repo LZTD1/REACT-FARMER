@@ -7,6 +7,7 @@ import ItemComment from '../../components/ItemComment';
 import { fetchItemById } from '../../redux/slices/pageItem';
 import Skeleton from './Skeleton';
 import RejectedItems from '../../components/Labels/RejectedItems';
+import EmptyComments from '../../components/Labels/EmptyComments';
 
 function ItemPage() {
   const { id } = useParams();
@@ -17,8 +18,6 @@ function ItemPage() {
     dispatch(fetchItemById(id));
   }, []);
 
-  console.log(items);
-
   return (
     <>
       {status.state === 'rejected' && <RejectedItems />}
@@ -26,12 +25,7 @@ function ItemPage() {
       {status.state === 'fulfilled' && (
         <div className={styles.root}>
           <div className={styles.frontBlock}>
-            <img
-              src={
-                'http://om-saratov.ru/files/pages/21296/1424331903general_pages_19_February_2015_i21296_deputaty_gordumy_prizvali.jpg'
-              }
-              alt={'photo'}
-            />
+            <img src={items['photo']} alt={items['name']} />
             <div className={styles.descriptionProduct}>
               <div className={styles.buttons}>
                 <button>{items['seller']}</button>
@@ -59,12 +53,14 @@ function ItemPage() {
             <h2>Отзывы о товаре:</h2>
             <div className={styles.comments}>
               <div className={styles.SeeComments}>
-                <ItemComment />
-                <ItemComment />
-                <ItemComment />
-                <ItemComment />
+                {items.length === 0 ? (
+                  items['comments'].map((obj, index) => (
+                    <ItemComment {...obj} key={index} />
+                  ))
+                ) : (
+                  <EmptyComments />
+                )}
               </div>
-
               <div className={styles.writeComment}>
                 <textarea placeholder="Напишите свой комментарий" />
                 <button>Отправить комментарий!</button>
