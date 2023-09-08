@@ -8,6 +8,7 @@ import { fetchItemById } from '../../redux/slices/pageItem';
 import Skeleton from './Skeleton';
 import RejectedItems from '../../components/Labels/RejectedItems';
 import EmptyComments from '../../components/Labels/EmptyComments';
+import { setStateAndDataModalWindow } from '../../redux/slices/modalWindow';
 
 function ItemPage() {
   const { id } = useParams();
@@ -47,6 +48,19 @@ function ItemPage() {
                 </span>
               </div>
               <p>{items['description']}</p>
+              <div
+                onClick={() => {
+                  dispatch(
+                    setStateAndDataModalWindow({
+                      active: true,
+                      modalData: items,
+                    })
+                  );
+                }}
+                className={styles.buttonBuy}
+              >
+                <span>Заказать</span>
+              </div>
             </div>
           </div>
           <div className={styles.commentBlock}>

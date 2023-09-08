@@ -7,11 +7,13 @@ import { Routes, Route } from 'react-router-dom';
 import Cart from './screens/Cart';
 import Home from './screens/Home';
 import ItemPage from './screens/ItemPage';
+import ModalProductWindow from './components/ModalProductWindow';
 
 function App() {
   return (
     <div className="wrapper">
       <Header />
+      <ModalProductWindow />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/cart" element={<Cart />} />

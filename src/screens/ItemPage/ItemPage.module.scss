@@ -71,8 +71,27 @@
     p {
       margin-top: 50px;
       max-width: 400px;
-      max-height: 500px;
+      max-height: 280px;
       overflow-y: auto;
+    }
+    .buttonBuy {
+      margin-top: 50px;
+      text-align: center;
+      font-weight: 500;
+      width: 300px;
+      cursor: pointer;
+      @include noselect;
+      padding: 7px 25px;
+      border-radius: 10px;
+      background-color: $green;
+      align-self: center;
+
+      &:hover {
+        background-color: darken($color: $green, $amount: 10);
+      }
+      &:active {
+        background-color: darken($color: $green, $amount: 20);
+      }
     }
   }
 }

@@ -15,7 +15,6 @@ import {
   setSortingName_eng,
   setSortingOrderBy,
 } from '../redux/slices/filter/popupSort';
-import ModalProductWindow from '../components/ModalProductWindow/';
 import { fetchItems } from '../redux/slices/homeItems';
 import RejectedItems from '../components/Labels/RejectedItems/';
 import EmptyItems from '../components/Labels/EmptyItems';
@@ -105,7 +104,6 @@ function Home() {
 
   return (
     <>
-      <ModalProductWindow />
       <SortingMethods />
       <h1 className="allProductDescription">Все продукты:</h1>
       {rejected && rejected}
