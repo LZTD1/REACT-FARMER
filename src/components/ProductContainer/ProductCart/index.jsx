@@ -8,7 +8,6 @@ import { Link } from 'react-router-dom';
 function ProductCart(props) {
   const { rating, seller, city, name, photo, price, purchases, type, id } =
     props;
-
   const [position, setPosition] = React.useState({ x: 0, y: 0 });
   const [isZoomed, setIsZoomed] = React.useState(false);
 
@@ -56,7 +55,7 @@ function ProductCart(props) {
             <div className={styles.price}>
               Цена:{' '}
               <span>
-                {price} ₽/{type}
+                {price} ₽/{['Кг', 'Л', 'Шт'][type]}
               </span>
             </div>
             <div

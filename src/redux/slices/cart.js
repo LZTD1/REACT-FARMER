@@ -33,7 +33,7 @@ const cartSlice = createSlice({
     addItem: (state, action) => {
       state.items.push(action.payload);
       state.amnount = state.items.reduce((sum, item) => {
-        return sum + item.pricePerKG * item.diliveryProperty.inputHowMutch;
+        return sum + item.price * item.diliveryProperty.inputHowMutch;
       }, 0);
 
       saveCartToLocalStorage(state);
@@ -43,7 +43,7 @@ const cartSlice = createSlice({
         (obj) => obj.orderDate !== action.payload
       );
       state.amnount = state.items.reduce((sum, item) => {
-        return sum + item.pricePerKG * item.diliveryProperty.inputHowMutch;
+        return sum + item.price * item.diliveryProperty.inputHowMutch;
       }, 0);
 
       saveCartToLocalStorage(state);

@@ -4,7 +4,6 @@ import ProductSkeleton from './ProductCart/skeleton';
 
 import styles from './ProductContainer.module.scss';
 
-const TYPE_OF_PRODUCT = ['Кг', 'Л', 'Шт'];
 const SKELETON = [...new Array(12)].map((_, index) => (
   <ProductSkeleton key={index} />
 ));
@@ -18,7 +17,6 @@ function ProductContainer({ isLoading, items }) {
             <ProductCart
               key={key}
               {...value}
-              type={TYPE_OF_PRODUCT[value.type]}
             />
           ))}
     </div>

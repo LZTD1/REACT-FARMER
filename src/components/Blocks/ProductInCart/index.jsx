@@ -5,13 +5,13 @@ import { useDispatch } from 'react-redux';
 import { removeItems } from '../../../redux/slices/cart';
 
 function ProductInCart({
+  seller,
+  city,
   name,
-  sellerCity,
-  sellerName,
   type,
   diliveryProperty,
   photo,
-  pricePerKG,
+  price,
   orderDate,
 }) {
   const dispatch = useDispatch();
@@ -25,8 +25,8 @@ function ProductInCart({
       <div className={styles.descriptionProduct}>
         <div className={styles.HeaderBlock}>
           <div className={styles.productName}>{name}</div>
-          <div className={styles.productSeller}>{sellerName}</div>
-          <div className={styles.productCity}>{sellerCity}</div>
+          <div className={styles.productSeller}>{seller}</div>
+          <div className={styles.productCity}>{city}</div>
         </div>
         <div className={styles.BodyBlock}>
           <div className={styles.productBlock}>
@@ -37,12 +37,11 @@ function ProductInCart({
             <div className={styles.amnount}>
               Количество заказа:{' '}
               <span>
-                {diliveryProperty.inputHowMutch} {type}
+                {diliveryProperty.inputHowMutch} {['Кг', 'Л', 'Шт'][type]}
               </span>
             </div>
             <div className={styles.priceForProduct}>
-              Цена:{' '}
-              <span>{diliveryProperty.inputHowMutch * pricePerKG} рублей</span>
+              Цена: <span>{diliveryProperty.inputHowMutch * price} рублей</span>
             </div>
           </div>
           <div className={styles.ButtonsBlock}>
