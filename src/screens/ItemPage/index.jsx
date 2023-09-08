@@ -53,7 +53,7 @@ function ItemPage() {
             <h2>Отзывы о товаре:</h2>
             <div className={styles.comments}>
               <div className={styles.SeeComments}>
-                {items.length === 0 ? (
+                {items.length !== 0 ? (
                   items['comments'].map((obj, index) => (
                     <ItemComment {...obj} key={index} />
                   ))

@@ -21,11 +21,11 @@ export const fetchItems = createAsyncThunk(
         price: obj['price'],
         purchases: obj['purchases'],
         type: obj['type'],
+        id: obj['id'],
       };
     });
   }
 );
-
 
 const initialState = {
   items: [],

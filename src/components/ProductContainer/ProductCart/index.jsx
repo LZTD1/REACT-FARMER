@@ -3,9 +3,11 @@ import { useDispatch } from 'react-redux';
 import { setStateAndDataModalWindow } from '../../../redux/slices/modalWindow';
 
 import styles from './ProductCart.module.scss';
+import { Link } from 'react-router-dom';
 
 function ProductCart(props) {
-  const { rating, seller, city, name, photo, price, purchases, type } = props;
+  const { rating, seller, city, name, photo, price, purchases, type, id } =
+    props;
 
   const [position, setPosition] = React.useState({ x: 0, y: 0 });
   const [isZoomed, setIsZoomed] = React.useState(false);
@@ -38,7 +40,9 @@ function ProductCart(props) {
           onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}
         >
-          <img src={photo} alt={name} style={zoomStyle} />
+          <Link to={`/item/${id}`}>
+            <img src={photo} alt={name} style={zoomStyle} />
+          </Link>
         </div>
         <div className={styles.descriptionContainer}>
           <div className={styles.line}>
