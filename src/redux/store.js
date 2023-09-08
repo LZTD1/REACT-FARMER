@@ -7,6 +7,7 @@ import modalWindow from './slices/modalWindow';
 import cart from './slices/cart';
 import homeItems from './slices/homeItems';
 import searchItems from './slices/searchItems';
+import pageItem from './slices/pageItem';
 
 export const store = configureStore({
   reducer: {
@@ -17,5 +18,6 @@ export const store = configureStore({
     cart: cart,
     homeItems: homeItems,
     searchItems: searchItems,
+    pageItem: pageItem,
   },
 });

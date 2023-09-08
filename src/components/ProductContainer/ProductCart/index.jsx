@@ -5,16 +5,7 @@ import { setStateAndDataModalWindow } from '../../../redux/slices/modalWindow';
 import styles from './ProductCart.module.scss';
 
 function ProductCart(props) {
-  const {
-    ratingProduct,
-    sellerCity,
-    sellerName,
-    name,
-    photo,
-    pricePerKG,
-    type,
-    buyProduct,
-  } = props;
+  const { rating, seller, city, name, photo, price, purchases, type } = props;
 
   const [position, setPosition] = React.useState({ x: 0, y: 0 });
   const [isZoomed, setIsZoomed] = React.useState(false);
@@ -52,16 +43,16 @@ function ProductCart(props) {
         <div className={styles.descriptionContainer}>
           <div className={styles.line}>
             <h3 className={styles.title}>{name}</h3>
-            <span className={styles.rating}>⭐ {ratingProduct}/5</span>
-            <span className={styles.buyProduct}>🛒 {buyProduct}</span>
+            <span className={styles.rating}>⭐ {rating}/5</span>
+            <span className={styles.buyProduct}>🛒 {purchases}</span>
           </div>
-          <div className={styles.tag}>{sellerName}</div>
-          <span className={styles.tag}>{sellerCity}</span>
+          <div className={styles.tag}>{seller}</div>
+          <span className={styles.tag}>{city}</span>
           <div className={styles.buyDescription}>
             <div className={styles.price}>
               Цена:{' '}
               <span>
-                {pricePerKG} ₽/{type}
+                {price} ₽/{type}
               </span>
             </div>
             <div

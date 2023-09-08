@@ -11,9 +11,21 @@ export const fetchItems = createAsyncThunk(
     if (res.data.length === 0) {
       return thunkAPI.rejectWithValue('empty');
     }
-    return res.data;
+    return res.data.map((obj) => {
+      return {
+        rating: obj['rating'],
+        seller: obj['seller'],
+        city: obj['city'],
+        name: obj['name'],
+        photo: obj['photo'],
+        price: obj['price'],
+        purchases: obj['purchases'],
+        type: obj['type'],
+      };
+    });
   }
 );
+
 
 const initialState = {
   items: [],

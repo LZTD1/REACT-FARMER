@@ -153,11 +153,11 @@ function ModalProductWindow() {
           <img src={modalData.photo} />
           <div className={styles.descriptionHeader}>
             <span>{modalData.name}</span>
-            <span>⭐ {modalData.ratingProduct}/5</span>
-            <span>🛒 {modalData.buyProduct}</span>
+            <span>⭐ {modalData.rating}/5</span>
+            <span>🛒 {modalData.purchases}</span>
           </div>
-          <button>{modalData.sellerName}</button>
-          <button>{modalData.sellerCity}</button>
+          <button>{modalData.seller}</button>
+          <button>{modalData.city}</button>
         </div>
         <div className={styles.buyMenu}>
           <span>Заполните данные для заказа:</span>

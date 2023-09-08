@@ -36,15 +36,28 @@
     display: flex;
     flex-direction: column;
 
-    .title {
-      margin-top: 25px;
-      font-size: 25px;
+    .buttons{
+      display: flex;
+      flex-direction: column;
     }
     .rating {
       margin-right: 30px;
       span {
         font-weight: 300;
         margin-left: 5px;
+      }
+    }
+    .nameAndPrice {
+      display: flex;
+      margin-bottom: 15px;
+      .title {
+        margin-top: 25px;
+        font-size: 25px;
+      }
+      span {
+        font-weight: 300;
+        margin-left: 30px;
+        margin-top: auto;
       }
     }
     .buyProduct {
@@ -96,10 +109,10 @@
         height: 40px;
         background-color: $green;
 
-        &:hover{
+        &:hover {
           background-color: darken($green, 5);
         }
-        &:active{
+        &:active {
           background-color: darken($green, 10);
         }
       }

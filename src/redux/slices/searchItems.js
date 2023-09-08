@@ -7,7 +7,16 @@ export const fetchItems = createAsyncThunk(
     const res = await axios.get(
       `https://649d52b89bac4a8e669d91e8.mockapi.io/items?search=${value}`
     );
-    return res.data;
+    return res.data.map((obj, key) => {
+      return {
+        type: obj['type'],
+        price: obj['price'],
+        photo: obj['photo'],
+        name: obj['name'],
+        seller: obj['seller'],
+        city: obj['city'],
+      };
+    });
   }
 );
 

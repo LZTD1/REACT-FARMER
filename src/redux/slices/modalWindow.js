@@ -3,14 +3,14 @@ import { createSlice } from '@reduxjs/toolkit';
 const initialState = {
   active: false,
   modalData: {
-    ratingProduct: null,
-    sellerCity: null,
-    sellerName: null,
+    rating: null,
+    seller: null,
+    city: null,
     name: null,
     photo: null,
-    pricePerKG: null,
+    price: null,
+    purchases: null,
     type: null,
-    buyProduct: null,
   },
 };
 
