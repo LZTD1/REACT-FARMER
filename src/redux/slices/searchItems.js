@@ -15,6 +15,7 @@ export const fetchItems = createAsyncThunk(
         name: obj['name'],
         seller: obj['seller'],
         city: obj['city'],
+        id: obj['id'],
       };
     });
   }
@@ -29,6 +30,10 @@ const searchItemsSlice = createSlice({
   name: 'searchItems',
   initialState: initialState,
   reducers: {
+    resetItems: (state) => {
+      state.items = initialState.items;
+      state.status = initialState.status;
+    },
     setItems: (state, action) => {
       state.items = action.payload;
     },
@@ -49,6 +54,6 @@ const searchItemsSlice = createSlice({
   },
 });
 
-export const { setItems } = searchItemsSlice.actions;
+export const { setItems, resetItems } = searchItemsSlice.actions;
 
 export default searchItemsSlice.reducer;

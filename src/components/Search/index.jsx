@@ -4,13 +4,43 @@ import debounce from 'lodash.debounce';
 import styles from './Search.module.scss';
 import ProductInSearch from '../Blocks/ProductInSearch';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchItems, setItems } from '../../redux/slices/searchItems';
+import {
+  fetchItems,
+  resetItems,
+  setItems,
+} from '../../redux/slices/searchItems';
 
 function Search() {
   const dispatch = useDispatch();
   const { status, items } = useSelector((state) => state.searchItems);
   const [searchWords, setSearchWords] = React.useState('');
   const inputRef = React.useRef();
+  const productsRef = React.useRef();
+  const searchRef = React.useRef();
+
+  React.useEffect(() => {
+    const handleClickOnScreen = (e) => {
+      if (
+        searchRef.current &&
+        !searchRef.current.contains(e.target) &&
+        status === 'fulfilled'
+      ) {
+        setSearchWords('');
+        dispatch(resetItems());
+      }
+
+      if (productsRef.current && productsRef.current.contains(e.target)) {
+        setSearchWords('');
+        dispatch(resetItems());
+      }
+    };
+
+    document.addEventListener('click', handleClickOnScreen);
+
+    return () => {
+      document.removeEventListener('click', handleClickOnScreen);
+    };
+  }, []);
 
   const debouncedOnChangeInput = React.useCallback(
     debounce((value) => {
@@ -25,7 +55,7 @@ function Search() {
 
   const onClickClear = () => {
     setSearchWords('');
-    dispatch(setItems([]));
+    dispatch(resetItems());
     inputRef.current.focus();
   };
 
@@ -36,7 +66,7 @@ function Search() {
   };
 
   return (
-    <div className={styles.root}>
+    <div className={styles.root} ref={searchRef}>
       <input
         ref={inputRef}
         value={searchWords}
@@ -92,7 +122,7 @@ function Search() {
         </svg>
       )}
       {status === 'fulfilled' && (
-        <div className={styles.searchedItems}>
+        <div className={styles.searchedItems} ref={productsRef}>
           {items.map((obj, index) => (
             <ProductInSearch key={index} {...obj} />
           ))}
