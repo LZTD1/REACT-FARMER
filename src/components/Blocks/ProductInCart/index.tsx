@@ -4,7 +4,18 @@ import styles from './ProductInCart.module.scss';
 import { useDispatch } from 'react-redux';
 import { removeItems } from '../../../redux/slices/cart';
 
-function ProductInCart({
+interface IProductInCart {
+  seller: string;
+  city: string;
+  name: string;
+  type: number;
+  diliveryProperty: any;
+  photo: number;
+  price: number;
+  orderDate: any;
+}
+
+const ProductInCart: React.FC<IProductInCart> = ({
   seller,
   city,
   name,
@@ -13,7 +24,7 @@ function ProductInCart({
   photo,
   price,
   orderDate,
-}) {
+}) => {
   const dispatch = useDispatch();
   const handleCancelItem = () => {
     dispatch(removeItems(orderDate));
@@ -56,6 +67,6 @@ function ProductInCart({
       </div>
     </div>
   );
-}
+};
 
 export default ProductInCart;

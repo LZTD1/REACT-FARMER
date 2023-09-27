@@ -5,14 +5,14 @@ import { useDispatch, useSelector } from 'react-redux';
 import styles from './pagination.module.scss';
 import { setPageNumber } from '../../../redux/slices/paginaton';
 
-function Pagination() {
+function Pagination(): JSX.Element {
   const pageData = useSelector((state) => ({
     allPages: state.paginaton.allPages,
     forcePage: state.paginaton.pageNumber,
   }));
   const dispatch = useDispatch();
 
-  const setPage = (event) => {
+  const setPage = (event: { selected: number }) => {
     dispatch(setPageNumber(event.selected + 1));
   };
 

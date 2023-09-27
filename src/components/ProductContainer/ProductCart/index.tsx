@@ -5,7 +5,19 @@ import { setStateAndDataModalWindow } from '../../../redux/slices/modalWindow';
 import styles from './ProductCart.module.scss';
 import { Link } from 'react-router-dom';
 
-function ProductCart(props) {
+interface IProductCart {
+  rating: number;
+  seller: string;
+  city: string;
+  name: string;
+  photo: string;
+  price: number;
+  purchases: number;
+  type: number;
+  id: string;
+}
+
+const ProductCart: React.FC<IProductCart> = (props) => {
   const { rating, seller, city, name, photo, price, purchases, type, id } =
     props;
   const [position, setPosition] = React.useState({ x: 0, y: 0 });
@@ -13,7 +25,7 @@ function ProductCart(props) {
 
   const dispatch = useDispatch();
 
-  const handleMouseMove = (e) => {
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     setPosition({ x: e.nativeEvent.offsetX, y: e.nativeEvent.offsetY });
   };
 
@@ -76,5 +88,5 @@ function ProductCart(props) {
       </div>
     </>
   );
-}
+};
 export default ProductCart;

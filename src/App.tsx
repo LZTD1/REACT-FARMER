@@ -1,5 +1,3 @@
-import React from 'react';
-
 import './scss/app.scss';
 import NotFound from './screens/NotFound';
 import { Routes, Route } from 'react-router-dom';
@@ -8,7 +6,7 @@ import Home from './screens/Home';
 import ItemPage from './screens/ItemPage';
 import MainLaoyut from './laoyuts/MainLaoyut';
 
-function App() {
+function App(): JSX.Element {
   return (
     <Routes>
       <Route path="/" element={<MainLaoyut />}>

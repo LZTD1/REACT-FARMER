@@ -3,8 +3,26 @@ import { Link } from 'react-router-dom';
 
 import styles from './productInSearch.module.scss';
 
-function ProductInSearch({ type, price, photo, name, seller, city, id }) {
-  const handleClick = (e) => {
+interface IProductInSearch {
+  type: number;
+  price: number;
+  photo: string;
+  name: string;
+  seller: string;
+  city: string;
+  id: string;
+}
+
+const ProductInSearch: React.FC<IProductInSearch> = ({
+  type,
+  price,
+  photo,
+  name,
+  seller,
+  city,
+  id,
+}) => {
+  const handleClick = (e : React.MouseEvent<HTMLSpanElement>) => {
     e.preventDefault();
   };
 
@@ -30,6 +48,6 @@ function ProductInSearch({ type, price, photo, name, seller, city, id }) {
       </div>
     </Link>
   );
-}
+};
 
 export default ProductInSearch;

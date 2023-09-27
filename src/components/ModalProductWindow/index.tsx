@@ -8,7 +8,7 @@ import {
 } from '../../redux/slices/modalWindow';
 import { addItem } from '../../redux/slices/cart';
 
-function ModalProductWindow() {
+function ModalProductWindow(): JSX.Element {
   const dispatch = useDispatch();
   const [modalActive, modalData] = useSelector((state) => [
     state.modalWindow.active,
@@ -19,11 +19,11 @@ function ModalProductWindow() {
   const [inputDiliveryTime, setInputDiliveryTime] = React.useState('');
   const [isPlaced, setIsPlaced] = React.useState(false);
 
-  const howMutchInputRef = React.useRef(null);
-  const diliveryTimeInputRef = React.useRef(null);
-  const diliveryAddressInputRef = React.useRef(null);
+  const howMutchInputRef = React.useRef<HTMLInputElement>(null);
+  const diliveryTimeInputRef = React.useRef<HTMLInputElement>(null);
+  const diliveryAddressInputRef = React.useRef<HTMLInputElement>(null);
 
-  const handleInputHowMutch = (e) => {
+  const handleInputHowMutch = (e: React.ChangeEvent<HTMLInputElement>) => {
     try {
       const numericValue = Number(e.target.value);
       if (!isNaN(numericValue) && numericValue <= 1000) {
@@ -33,12 +33,12 @@ function ModalProductWindow() {
       console.error(error);
     }
   };
-  const handleDiliveryTime = (e) => {
+  const handleDiliveryTime = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.value.split('-')[0] < 2100) {
       setInputDiliveryTime(e.target.value);
     }
   };
-  const handleDiliveryAddress = (e) => {
+  const handleDiliveryAddress = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInputDiliveryAddress(e.target.value);
   };
   const resetAllInputs = () => {
@@ -49,26 +49,41 @@ function ModalProductWindow() {
   const handlePlaceOrder = () => {
     let isError = false;
     if (inputHowMutch === 0) {
-      howMutchInputRef.current.classList.add(styles.flashing);
-      setTimeout(() => {
-        howMutchInputRef.current.classList.remove(styles.flashing);
-      }, 2000);
-      isError = true;
+      if (howMutchInputRef.current) {
+        howMutchInputRef.current.classList.add(styles.flashing);
+        setTimeout(() => {
+          if (howMutchInputRef.current) {
+            howMutchInputRef.current.classList.remove(styles.flashing);
+          }
+        }, 2000);
+        isError = true;
+      }
     }
+
     if (inputDiliveryTime.trim() === '') {
-      diliveryTimeInputRef.current.classList.add(styles.flashing);
-      setTimeout(() => {
-        diliveryTimeInputRef.current.classList.remove(styles.flashing);
-      }, 2000);
-      isError = true;
+      if (diliveryTimeInputRef.current) {
+        diliveryTimeInputRef.current.classList.add(styles.flashing);
+        setTimeout(() => {
+          if (diliveryTimeInputRef.current) {
+            diliveryTimeInputRef.current.classList.remove(styles.flashing);
+          }
+        }, 2000);
+        isError = true;
+      }
     }
+
     if (inputDiliveryAddress === '') {
-      diliveryAddressInputRef.current.classList.add(styles.flashing);
-      setTimeout(() => {
-        diliveryAddressInputRef.current.classList.remove(styles.flashing);
-      }, 2000);
-      isError = true;
+      if (diliveryAddressInputRef.current) {
+        diliveryAddressInputRef.current.classList.add(styles.flashing);
+        setTimeout(() => {
+          if (diliveryAddressInputRef.current) {
+            diliveryAddressInputRef.current.classList.remove(styles.flashing);
+          }
+        }, 2000);
+        isError = true;
+      }
     }
+
     if (isError) {
       return;
     }
@@ -121,7 +136,7 @@ function ModalProductWindow() {
             ? `${styles.modal_content} ${styles.mc_active}`
             : styles.modal_content
         }
-        onClick={(e) => e.stopPropagation()}
+        onClick={(e: React.MouseEvent<HTMLDivElement>) => e.stopPropagation()}
       >
         <button className={styles.closeButton}>
           <svg

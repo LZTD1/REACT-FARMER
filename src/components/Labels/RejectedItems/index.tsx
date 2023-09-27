@@ -2,7 +2,7 @@ import React from 'react';
 
 import styles from './RejectedItems.module.scss';
 
-function RejectedItems() {
+const RejectedItems = (): JSX.Element => {
   return (
     <div className={styles.root}>
       <h1>🛠</h1>
@@ -14,6 +14,6 @@ function RejectedItems() {
       </span>
     </div>
   );
-}
+};
 
 export default RejectedItems;

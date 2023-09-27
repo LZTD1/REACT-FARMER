@@ -1,7 +1,7 @@
 import React from 'react';
 import ContentLoader from 'react-content-loader';
 
-const ProductSkeleton = (props) => (
+const ProductSkeleton: React.FC = (props: any) => (
   <ContentLoader
     speed={2}
     width={1755}

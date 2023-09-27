@@ -2,7 +2,7 @@ import React from 'react';
 
 import styles from './EmptyCart.module.scss';
 
-function EmptyCart() {
+function EmptyCart(): JSX.Element {
   return (
     <div className={styles.root}>
       <h1>&#128722;</h1>

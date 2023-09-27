@@ -10,7 +10,7 @@ import RejectedItems from '../../components/Labels/RejectedItems';
 import EmptyComments from '../../components/Labels/EmptyComments';
 import { setStateAndDataModalWindow } from '../../redux/slices/modalWindow';
 
-function ItemPage() {
+function ItemPage(): JSX.Element {
   const { id } = useParams();
   const dispatch = useDispatch();
   const { items, status } = useSelector((state) => state.pageItem);
@@ -68,7 +68,7 @@ function ItemPage() {
             <div className={styles.comments}>
               <div className={styles.SeeComments}>
                 {items.length !== 0 ? (
-                  items['comments'].map((obj, index) => (
+                  items['comments'].map((obj, index: number) => (
                     <ItemComment {...obj} key={index} />
                   ))
                 ) : (

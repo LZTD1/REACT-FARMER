@@ -10,26 +10,30 @@ import {
   setItems,
 } from '../../redux/slices/searchItems';
 
-function Search() {
+function Search(): JSX.Element {
   const dispatch = useDispatch();
   const { status, items } = useSelector((state) => state.searchItems);
   const [searchWords, setSearchWords] = React.useState('');
-  const inputRef = React.useRef();
-  const productsRef = React.useRef();
-  const searchRef = React.useRef();
+
+  const inputRef = React.useRef<HTMLInputElement>(null);
+  const productsRef = React.useRef<HTMLInputElement>(null);
+  const searchRef = React.useRef<HTMLInputElement>(null);
 
   React.useEffect(() => {
-    const handleClickOnScreen = (e) => {
+    const handleClickOnScreen = (e: MouseEvent) => {
       if (
         searchRef.current &&
-        !searchRef.current.contains(e.target) &&
+        !searchRef.current.contains(e.target as Node) &&
         status === 'fulfilled'
       ) {
         setSearchWords('');
         dispatch(resetItems());
       }
 
-      if (productsRef.current && productsRef.current.contains(e.target)) {
+      if (
+        productsRef.current &&
+        productsRef.current.contains(e.target as Node)
+      ) {
         setSearchWords('');
         dispatch(resetItems());
       }
@@ -43,7 +47,7 @@ function Search() {
   }, []);
 
   const debouncedOnChangeInput = React.useCallback(
-    debounce((value) => {
+    debounce((value : string) => {
       if (value.trim() !== '') {
         dispatch(fetchItems(value));
       } else {
@@ -59,7 +63,7 @@ function Search() {
     inputRef.current.focus();
   };
 
-  const onChangeInput = (event) => {
+  const onChangeInput = (event :) => {
     const newValue = event.target.value;
     setSearchWords(newValue); // необходим для подконтрольного инпута
     debouncedOnChangeInput(newValue);
@@ -123,7 +127,7 @@ function Search() {
       )}
       {status === 'fulfilled' && (
         <div className={styles.searchedItems} ref={productsRef}>
-          {items.map((obj, index) => (
+          {items.map((obj : any, index : number) => (
             <ProductInSearch key={index} {...obj} />
           ))}
         </div>

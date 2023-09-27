@@ -1,8 +1,6 @@
-import React from 'react';
-
 import styles from './NotFound.module.scss';
 
-function NotFoundBlock() {
+function NotFoundBlock(): JSX.Element {
   return (
     <div className={styles.root}>
       <h1>4&#128533;4</h1>

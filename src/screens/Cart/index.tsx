@@ -6,7 +6,7 @@ import styles from './Cart.module.scss';
 import { useSelector } from 'react-redux';
 import { selectCart } from '../../redux/slices/cart';
 
-function Cart() {
+function Cart(): JSX.Element {
   const items = useSelector((store) => store.cart.items);
   const [amnount, itemsCount] = useSelector(selectCart);
 

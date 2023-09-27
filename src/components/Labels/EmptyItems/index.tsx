@@ -2,7 +2,7 @@ import React from 'react';
 
 import styles from './EmptyItems.module.scss';
 
-function EmptyItems() {
+function EmptyItems(): JSX.Element {
   return (
     <div className={styles.root}>
       <h1>&#128269;</h1>

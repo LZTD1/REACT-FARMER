@@ -19,7 +19,7 @@ import { fetchItems } from '../redux/slices/homeItems';
 import RejectedItems from '../components/Labels/RejectedItems/';
 import EmptyItems from '../components/Labels/EmptyItems';
 
-function Home() {
+function Home() : JSX.Element {
   const [searchParams, setSearchParams] = useSearchParams();
   const dispatch = useDispatch();
   const activeIndex = useSelector(selectCategoryId);

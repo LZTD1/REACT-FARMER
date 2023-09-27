@@ -8,7 +8,7 @@ import { resetPageNumber } from '../../../redux/slices/paginaton';
 import { resetSorting } from '../../../redux/slices/filter/popupSort';
 import { selectCart } from '../../../redux/slices/cart';
 
-function Header() {
+function Header(): JSX.Element {
   const dispatch = useDispatch();
   const [amnount, itemsCount] = useSelector(selectCart);
 

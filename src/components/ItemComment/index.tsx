@@ -2,7 +2,12 @@ import React from 'react';
 
 import styles from './ItemComment.module.scss';
 
-function ItemComment({ name, rating, comment }) {
+interface IPropsComment {
+  name: string;
+  rating: number;
+  comment: string;
+}
+const ItemComment: React.FC<IPropsComment> = ({ name, rating, comment }) => {
   return (
     <div className={styles.root}>
       <div className={styles.HeaderComment}>
@@ -20,6 +25,6 @@ function ItemComment({ name, rating, comment }) {
       </div>
     </div>
   );
-}
+};
 
 export default ItemComment;
