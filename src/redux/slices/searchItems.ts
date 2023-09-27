@@ -1,10 +1,11 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
+import { SearchItems, itemInSearch } from '../../@types/SearchItems';
 
-export const fetchItems = createAsyncThunk(
+export const fetchItems = createAsyncThunk<itemInSearch[], string>(
   'searchItems/fetchItems',
   async (value) => {
-    const res = await axios.get(
+    const res = await axios.get<itemInSearch[]>(
       `https://649d52b89bac4a8e669d91e8.mockapi.io/items?search=${value}`
     );
     return res.data.map((obj, key) => {
@@ -21,9 +22,12 @@ export const fetchItems = createAsyncThunk(
   }
 );
 
-const initialState = {
+const initialState: SearchItems = {
   items: [],
-  status: 'pending',
+  status: {
+    state: 'pending',
+    meta: '',
+  },
 };
 
 const searchItemsSlice = createSlice({
@@ -38,19 +42,19 @@ const searchItemsSlice = createSlice({
       state.items = action.payload;
     },
   },
-  extraReducers: {
-    [fetchItems.pending]: (state) => {
-      state.status = 'pending';
+  extraReducers: (builder) => {
+    builder.addCase(fetchItems.pending, (state) => {
+      state.status.state = 'pending';
       state.items = [];
-    },
-    [fetchItems.fulfilled]: (state, action) => {
-      state.status = 'fulfilled';
+    });
+    builder.addCase(fetchItems.fulfilled, (state, action) => {
+      state.status.state = 'fulfilled';
       state.items = action.payload;
-    },
-    [fetchItems.rejected]: (state) => {
-      state.status = 'rejected';
+    });
+    builder.addCase(fetchItems.rejected, (state, action) => {
+      state.status = { state: 'rejected', meta: action.payload as string };
       state.items = [];
-    },
+    });
   },
 });
 

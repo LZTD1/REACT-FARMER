@@ -1,10 +1,17 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { PayloadAction, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
+import { homeItemsSlice } from '../../@types/homeItems';
+import { IPizzaItem } from '../../@types/MainTypes';
 
-export const fetchItems = createAsyncThunk(
+// returned , arg
+
+export const fetchItems = createAsyncThunk<
+  IPizzaItem[],
+  Record<string, string>
+>(
   'homeItems/fetchItems',
   async ({ currentPage, category, name_eng, orderBy }, thunkAPI) => {
-    const res = await axios.get(
+    const res = await axios.get<IPizzaItem[]>(
       `https://649d52b89bac4a8e669d91e8.mockapi.io/items?page=${currentPage}&limit=12${category}&sortBy=${name_eng}&order=${orderBy}`
     );
 
@@ -22,12 +29,15 @@ export const fetchItems = createAsyncThunk(
         purchases: obj['purchases'],
         type: obj['type'],
         id: obj['id'],
+        comments: obj['comments'],
+        description: obj['description'],
+        category: obj['category'],
       };
     });
   }
 );
 
-const initialState = {
+const initialState: homeItemsSlice = {
   items: [],
   status: { state: 'pending', meta: '' },
 };
@@ -36,23 +46,23 @@ const homeItemsSlice = createSlice({
   name: 'homeItems',
   initialState: initialState,
   reducers: {
-    setItems: (state, action) => {
+    setItems: (state, action: PayloadAction<IPizzaItem[]>) => {
       state.items = action.payload;
     },
   },
-  extraReducers: {
-    [fetchItems.pending]: (state) => {
+  extraReducers: (builder) => {
+    builder.addCase(fetchItems.pending, (state) => {
       state.status.state = 'pending';
       state.items = [];
-    },
-    [fetchItems.fulfilled]: (state, action) => {
+    });
+    builder.addCase(fetchItems.fulfilled, (state, action) => {
       state.status.state = 'fulfilled';
       state.items = action.payload;
-    },
-    [fetchItems.rejected]: (state, action) => {
-      state.status = { state: 'rejected', meta: action.payload };
+    });
+    builder.addCase(fetchItems.rejected, (state, action) => {
+      state.status = { state: 'rejected', meta: action.payload as string };
       state.items = [];
-    },
+    });
   },
 });
 

@@ -9,7 +9,7 @@ import homeItems from './slices/homeItems';
 import searchItems from './slices/searchItems';
 import pageItem from './slices/pageItem';
 
-export const store = configureStore({
+const store = configureStore({
   reducer: {
     categorySort: category,
     popupSort: popupSort,
@@ -21,3 +21,6 @@ export const store = configureStore({
     pageItem: pageItem,
   },
 });
+
+export type RootState = ReturnType<typeof store.getState>;
+export default store;

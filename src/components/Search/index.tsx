@@ -63,7 +63,7 @@ function Search(): JSX.Element {
     inputRef.current.focus();
   };
 
-  const onChangeInput = (event :) => {
+  const onChangeInput = (event : React.ChangeEvent<HTMLInputElement>) => {
     const newValue = event.target.value;
     setSearchWords(newValue); // необходим для подконтрольного инпута
     debouncedOnChangeInput(newValue);
