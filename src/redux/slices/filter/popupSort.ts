@@ -1,6 +1,9 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { RootState } from '../../store';
-import { IPopupSlice, IPopupSliceData } from '../../../@types/MainTypes';
+import {
+  IPopupSlice,
+  IPopupSliceData,
+} from '../../../@types/redux/IPopupSlice';
 
 const initialState: IPopupSlice = {
   sort: {
@@ -28,12 +31,18 @@ const popupSlice = createSlice({
     setSortingBy: (state, action: PayloadAction<IPopupSliceData>) => {
       state.sort = action.payload;
     },
-    setSortingName_eng: (state, action: PayloadAction<IPopupSliceData['name_eng']>) => {
+    setSortingName_eng: (
+      state,
+      action: PayloadAction<IPopupSliceData['name_eng']>
+    ) => {
       state.sort.name_eng = action.payload;
       state.sort.name_ru =
         localizationMap[state.sort.name_eng][state.sort.orderBy];
     },
-    setSortingOrderBy: (state, action: PayloadAction<IPopupSliceData['orderBy']>) => {
+    setSortingOrderBy: (
+      state,
+      action: PayloadAction<IPopupSliceData['orderBy']>
+    ) => {
       state.sort.orderBy = action.payload;
       state.sort.name_ru =
         localizationMap[state.sort.name_eng][state.sort.orderBy];

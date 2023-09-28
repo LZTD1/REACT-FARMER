@@ -3,20 +3,21 @@ import ProductCart from './ProductCart';
 import ProductSkeleton from './ProductCart/skeleton';
 
 import styles from './ProductContainer.module.scss';
+import { IPizzaItem } from '../../@types/MainTypes';
 
 const SKELETON = [...new Array(12)].map((_, index) => (
   <ProductSkeleton key={index} />
 ));
 
-interface IProductInHome {
-  item: any,
-}
 interface IProductContainer {
-  isLoading: boolean,
-  items: IProductInHome[]
+  isLoading: boolean;
+  items: IPizzaItem[];
 }
 
-const ProductContainer: React.FC<IProductContainer> = ({ isLoading, items }) => {
+const ProductContainer: React.FC<IProductContainer> = ({
+  isLoading,
+  items,
+}) => {
   return (
     <div className={styles.productContainer}>
       {isLoading
@@ -24,5 +25,5 @@ const ProductContainer: React.FC<IProductContainer> = ({ isLoading, items }) => 
         : items.map((value, key) => <ProductCart key={key} {...value} />)}
     </div>
   );
-}
+};
 export default ProductContainer;

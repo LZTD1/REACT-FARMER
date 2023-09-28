@@ -8,6 +8,7 @@ import cart from './slices/cart';
 import homeItems from './slices/homeItems';
 import searchItems from './slices/searchItems';
 import pageItem from './slices/pageItem';
+import { useDispatch } from 'react-redux';
 
 const store = configureStore({
   reducer: {
@@ -21,6 +22,9 @@ const store = configureStore({
     pageItem: pageItem,
   },
 });
+
+export type AppDispatch = typeof store.dispatch;
+export const useAppDispatch: () => AppDispatch = useDispatch;
 
 export type RootState = ReturnType<typeof store.getState>;
 export default store;

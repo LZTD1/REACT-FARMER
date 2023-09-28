@@ -1,9 +1,9 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
 import { setStateAndDataModalWindow } from '../../../redux/slices/modalWindow';
 
 import styles from './ProductCart.module.scss';
 import { Link } from 'react-router-dom';
+import { useAppDispatch } from '../../../redux/store';
 
 interface IProductCart {
   rating: number;
@@ -23,7 +23,7 @@ const ProductCart: React.FC<IProductCart> = (props) => {
   const [position, setPosition] = React.useState({ x: 0, y: 0 });
   const [isZoomed, setIsZoomed] = React.useState(false);
 
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     setPosition({ x: e.nativeEvent.offsetX, y: e.nativeEvent.offsetY });

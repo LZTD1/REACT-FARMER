@@ -1,7 +1,7 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
-import { Pagination } from '../../@types/Pagination';
+import { IPagination } from '../../@types/redux/IPagination';
 
-const initialState: Pagination = {
+const initialState: IPagination = {
   pageNumber: 1,
   allPages: 3,
 };

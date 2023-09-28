@@ -1,13 +1,14 @@
 import { Link } from 'react-router-dom';
-import ProductInCart from '../../components/Blocks/ProductInCart';
+import { ProductInCart } from '../../components/Blocks/ProductInCart/';
 import EmptyCart from '../../components/Labels/EmptyCart/';
 
 import styles from './Cart.module.scss';
 import { useSelector } from 'react-redux';
 import { selectCart } from '../../redux/slices/cart';
+import { RootState } from '../../redux/store';
 
 function Cart(): JSX.Element {
-  const items = useSelector((store) => store.cart.items);
+  const items = useSelector((store: RootState) => store.cart.items);
   const [amnount, itemsCount] = useSelector(selectCart);
 
   return (

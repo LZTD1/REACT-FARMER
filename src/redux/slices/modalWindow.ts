@@ -1,9 +1,10 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
-import { modalWindowSlice } from '../../@types/ModalWindow';
+import { IModalWindowSlice } from '../../@types/redux/IModalWindow';
 
-const initialState: modalWindowSlice = {
+const initialState: IModalWindowSlice = {
   active: false,
   modalData: {
+    id: null,
     rating: null,
     seller: null,
     city: null,
@@ -24,7 +25,7 @@ const modalWindowSlice = createSlice({
     },
     setModalData: (
       state,
-      action: PayloadAction<modalWindowSlice['modalData']>
+      action: PayloadAction<IModalWindowSlice['modalData']>
     ) => {
       state.modalData = action.payload;
     },
@@ -34,7 +35,7 @@ const modalWindowSlice = createSlice({
     },
     setStateAndDataModalWindow: (
       state,
-      action: PayloadAction<modalWindowSlice>
+      action: PayloadAction<IModalWindowSlice>
     ) => {
       state.active = action.payload.active;
       state.modalData = action.payload.modalData;

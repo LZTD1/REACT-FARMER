@@ -1,11 +1,11 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
-import { SearchItems, itemInSearch } from '../../@types/SearchItems';
+import { ISearchItems, IItemInSearch } from '../../@types/redux/ISearchItems';
 
-export const fetchItems = createAsyncThunk<itemInSearch[], string>(
+export const fetchItems = createAsyncThunk<IItemInSearch[], string>(
   'searchItems/fetchItems',
   async (value) => {
-    const res = await axios.get<itemInSearch[]>(
+    const res = await axios.get<IItemInSearch[]>(
       `https://649d52b89bac4a8e669d91e8.mockapi.io/items?search=${value}`
     );
     return res.data.map((obj, key) => {
@@ -22,7 +22,7 @@ export const fetchItems = createAsyncThunk<itemInSearch[], string>(
   }
 );
 
-const initialState: SearchItems = {
+const initialState: ISearchItems = {
   items: [],
   status: {
     state: 'pending',

@@ -1,6 +1,6 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
-import { ICategorySlice, ITypesProduct } from '../../../@types/MainTypes';
 import { RootState } from '../../store';
+import { ICategorySlice } from '../../../@types/redux/ICategorySlice';
 
 const initialState: ICategorySlice = { categoryId: 0 };
 
@@ -8,7 +8,7 @@ const categorySlice = createSlice({
   name: 'category',
   initialState: initialState,
   reducers: {
-    setCategoryId: (state, action: PayloadAction<ITypesProduct>) => {
+    setCategoryId: (state, action: PayloadAction<number>) => {
       state.categoryId = action.payload;
     },
     resetCategoryId: (state) => {

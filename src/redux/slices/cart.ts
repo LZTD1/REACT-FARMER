@@ -1,5 +1,5 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
-import { ICartSlice, IItemInCart } from '../../@types/MainTypes';
+import { ICartSlice, IItemInCart } from '../../@types/redux/ICartSlice';
 import { RootState } from '../store';
 
 const saveCartToLocalStorage = (cartState: ICartSlice) => {

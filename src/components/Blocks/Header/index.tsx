@@ -1,15 +1,16 @@
 import { Link } from 'react-router-dom';
 
-import Search from '../../Search/';
+import { Search } from '../../Search';
 import styles from './HeaderBlock.module.scss';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { resetCategoryId } from '../../../redux/slices/filter/category';
 import { resetPageNumber } from '../../../redux/slices/paginaton';
 import { resetSorting } from '../../../redux/slices/filter/popupSort';
 import { selectCart } from '../../../redux/slices/cart';
+import { useAppDispatch } from '../../../redux/store';
 
 function Header(): JSX.Element {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const [amnount, itemsCount] = useSelector(selectCart);
 
   const handlerClick = () => {

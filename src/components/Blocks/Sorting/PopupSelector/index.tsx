@@ -1,15 +1,17 @@
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 import styles from './PopupSelector.module.scss';
 import {
   selectSort,
   setSortingBy,
 } from '../../../../redux/slices/filter/popupSort';
+import { useAppDispatch } from '../../../../redux/store';
+import { IPopupSliceData } from '../../../../@types/redux/IPopupSlice';
 
 function PopupSelector(): JSX.Element {
   const sortParams = useSelector(selectSort);
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   const [showPopupWindow, setShowPopupWindow] = React.useState(false);
 
@@ -69,7 +71,7 @@ function PopupSelector(): JSX.Element {
                 className={sortParams.name_ru === obj.name_ru && styles.active}
                 key={id}
                 onClick={() => {
-                  dispatch(setSortingBy(obj));
+                  dispatch(setSortingBy(obj as IPopupSliceData));
                   setShowPopupWindow(false);
                 }}
               >

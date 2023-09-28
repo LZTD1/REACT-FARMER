@@ -1,8 +1,9 @@
-import { IPizzaItem } from './MainTypes';
+import { IPizzaItem } from '../MainTypes';
 
-export interface modalWindowSlice {
+export interface IModalWindowSlice {
   active: boolean;
   modalData: {
+    id: IPizzaItem['id'] | null;
     rating: IPizzaItem['rating'] | null;
     seller: IPizzaItem['seller'] | null;
     city: IPizzaItem['city'] | null;

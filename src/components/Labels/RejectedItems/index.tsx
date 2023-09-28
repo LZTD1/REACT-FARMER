@@ -1,5 +1,3 @@
-import React from 'react';
-
 import styles from './RejectedItems.module.scss';
 
 const RejectedItems = (): JSX.Element => {

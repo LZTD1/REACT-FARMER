@@ -1,6 +1,6 @@
-import { IPizzaItem } from './MainTypes';
+import { IPizzaItem } from '../MainTypes';
 
-export interface PageItem {
+export interface IPageItem {
   item: IPizzaItem | null;
   status: {
     state: 'pending' | 'fulfilled' | 'rejected';

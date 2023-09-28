@@ -1,22 +1,20 @@
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 import styles from './CategoriesSelector.module.scss';
 import {
   selectCategoryId,
   setCategoryId,
 } from '../../../../redux/slices/filter/category';
+import { useAppDispatch } from '../../../../redux/store';
 
-interface ICategory {
-  category: string;
-}
 interface ICategories {
-  categories: ICategory[];
+  categories: string[];
 }
 
 const CategoriesSelector: React.FC<ICategories> = ({ categories }) => {
   const activeIndex = useSelector(selectCategoryId);
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   return (
     <div className={styles.root}>
@@ -28,7 +26,7 @@ const CategoriesSelector: React.FC<ICategories> = ({ categories }) => {
           }}
           className={Number(activeIndex) === index ? styles.active : ''}
         >
-          {categoryObj.category}
+          {categoryObj}
         </div>
       ))}
     </div>

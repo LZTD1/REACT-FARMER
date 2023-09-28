@@ -1,19 +1,18 @@
 import React from 'react';
 
 import styles from './ModalProductWindow.module.scss';
-import { useDispatch, useSelector } from 'react-redux';
-import {
-  resetModalWindow,
-  setStateModalWindow,
-} from '../../redux/slices/modalWindow';
+import { useSelector } from 'react-redux';
+import { resetModalWindow } from '../../redux/slices/modalWindow';
 import { addItem } from '../../redux/slices/cart';
+import { RootState, useAppDispatch } from '../../redux/store';
+import { IItemInCart } from '../../@types/redux/ICartSlice';
 
 function ModalProductWindow(): JSX.Element {
-  const dispatch = useDispatch();
-  const [modalActive, modalData] = useSelector((state) => [
-    state.modalWindow.active,
-    state.modalWindow.modalData,
-  ]);
+  const dispatch = useAppDispatch();
+
+  const modalWindow = useSelector((state: RootState) => state.modalWindow);
+  const { active: modalActive, modalData } = modalWindow;
+
   const [inputDiliveryAddress, setInputDiliveryAddress] = React.useState('');
   const [inputHowMutch, setInputHowMutch] = React.useState(0);
   const [inputDiliveryTime, setInputDiliveryTime] = React.useState('');
@@ -34,7 +33,7 @@ function ModalProductWindow(): JSX.Element {
     }
   };
   const handleDiliveryTime = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.value.split('-')[0] < 2100) {
+    if (Number(e.target.value.split('-')[0]) < 2100) {
       setInputDiliveryTime(e.target.value);
     }
   };
@@ -99,7 +98,7 @@ function ModalProductWindow(): JSX.Element {
     };
 
     setIsPlaced(true);
-    dispatch(addItem(orderData));
+    dispatch(addItem(orderData as IItemInCart));
 
     setTimeout(() => {
       dispatch(resetModalWindow());
@@ -109,7 +108,7 @@ function ModalProductWindow(): JSX.Element {
   };
 
   React.useEffect(() => {
-    const handleKeyDown = (e) => {
+    const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'Escape') {
         dispatch(resetModalWindow());
       }
@@ -165,7 +164,7 @@ function ModalProductWindow(): JSX.Element {
           </svg>
         </button>
         <div className={styles.description}>
-          <img src={modalData.photo} />
+          <img src={String(modalData.photo)} />
           <div className={styles.descriptionHeader}>
             <span>{modalData.name}</span>
             <span>⭐ {modalData.rating}/5</span>

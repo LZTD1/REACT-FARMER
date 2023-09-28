@@ -1,18 +1,20 @@
 import React from 'react';
 import debounce from 'lodash.debounce';
-
 import styles from './Search.module.scss';
 import ProductInSearch from '../Blocks/ProductInSearch';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import {
   fetchItems,
   resetItems,
   setItems,
 } from '../../redux/slices/searchItems';
+import { RootState, useAppDispatch } from '../../redux/store';
 
-function Search(): JSX.Element {
-  const dispatch = useDispatch();
-  const { status, items } = useSelector((state) => state.searchItems);
+export function Search(): JSX.Element {
+  const dispatch = useAppDispatch();
+  const { status, items } = useSelector(
+    (state: RootState) => state.searchItems
+  );
   const [searchWords, setSearchWords] = React.useState('');
 
   const inputRef = React.useRef<HTMLInputElement>(null);
@@ -24,7 +26,7 @@ function Search(): JSX.Element {
       if (
         searchRef.current &&
         !searchRef.current.contains(e.target as Node) &&
-        status === 'fulfilled'
+        status.state === 'fulfilled'
       ) {
         setSearchWords('');
         dispatch(resetItems());
@@ -47,7 +49,7 @@ function Search(): JSX.Element {
   }, []);
 
   const debouncedOnChangeInput = React.useCallback(
-    debounce((value : string) => {
+    debounce((value: string) => {
       if (value.trim() !== '') {
         dispatch(fetchItems(value));
       } else {
@@ -60,10 +62,10 @@ function Search(): JSX.Element {
   const onClickClear = () => {
     setSearchWords('');
     dispatch(resetItems());
-    inputRef.current.focus();
+    inputRef.current?.focus();
   };
 
-  const onChangeInput = (event : React.ChangeEvent<HTMLInputElement>) => {
+  const onChangeInput = (event: React.ChangeEvent<HTMLInputElement>) => {
     const newValue = event.target.value;
     setSearchWords(newValue); // необходим для подконтрольного инпута
     debouncedOnChangeInput(newValue);
@@ -125,9 +127,9 @@ function Search(): JSX.Element {
           </g>
         </svg>
       )}
-      {status === 'fulfilled' && (
+      {status.state === 'fulfilled' && (
         <div className={styles.searchedItems} ref={productsRef}>
-          {items.map((obj : any, index : number) => (
+          {items.map((obj: any, index: number) => (
             <ProductInSearch key={index} {...obj} />
           ))}
         </div>
@@ -135,5 +137,3 @@ function Search(): JSX.Element {
     </div>
   );
 }
-
-export default Search;

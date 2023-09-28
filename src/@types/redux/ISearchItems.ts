@@ -1,6 +1,6 @@
-import { IPizzaItem } from './MainTypes';
+import { IPizzaItem } from '../MainTypes';
 
-export interface itemInSearch {
+export interface IItemInSearch {
   type: IPizzaItem['type'];
   price: IPizzaItem['price'];
   photo: IPizzaItem['photo'];
@@ -10,8 +10,8 @@ export interface itemInSearch {
   id: IPizzaItem['id'];
 }
 
-export interface SearchItems {
-  items: itemInSearch[];
+export interface ISearchItems {
+  items: IItemInSearch[];
   status: {
     state: 'pending' | 'fulfilled' | 'rejected';
     meta: string;

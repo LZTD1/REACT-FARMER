@@ -1,6 +1,6 @@
 import { PayloadAction, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
-import { homeItemsSlice } from '../../@types/homeItems';
+import { IHomeItemsSlice } from '../../@types/redux/IHomeItems';
 import { IPizzaItem } from '../../@types/MainTypes';
 
 // returned , arg
@@ -37,7 +37,7 @@ export const fetchItems = createAsyncThunk<
   }
 );
 
-const initialState: homeItemsSlice = {
+const initialState: IHomeItemsSlice = {
   items: [],
   status: { state: 'pending', meta: '' },
 };
