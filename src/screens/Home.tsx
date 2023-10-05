@@ -6,15 +6,18 @@ import SortingMethods from '../components/Blocks/Sorting';
 import ProductContainer from '../components/ProductContainer/';
 import Paginaton from '../components/Blocks/Pagination/';
 import { setPageNumber } from '../redux/slices/paginaton';
+
 import {
   selectCategoryId,
   setCategoryId,
 } from '../redux/slices/filter/category';
+
 import {
   selectSort,
   setSortingName_eng,
   setSortingOrderBy,
 } from '../redux/slices/filter/popupSort';
+
 import { fetchItems } from '../redux/slices/homeItems';
 import RejectedItems from '../components/Labels/RejectedItems/';
 import EmptyItems from '../components/Labels/EmptyItems';
